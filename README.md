@@ -29,7 +29,7 @@ don't forget requirements.txt
 - [ ] make front-end pretty + simple
 - [ ] deploy to heroku 
 
-#refs
+# refs
 i haven't written a webapp in so long and i refuse to write in javascript so i need to consult beginner tutorials that i am compiling here:
 - https://realpython.com/introduction-to-flask-part-1-setting-up-a-static-site/
 - https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe
