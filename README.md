@@ -27,10 +27,19 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 
 
 # checklist for la basic app
-- [ ] get python script to work w purely csv
+- [ ] get js script wrking purely w csv
+- [ ] have it spit out on page the common ingredients
+- [ ] possibly export to txt document or csv
 - [ ] then google docs link
 - [ ] make front-end pretty + simple
-- [ ] deploy to heroku 
+- [ ] deploy to gh pages
+
+# checklist for when la basic app works 
+- [ ] downloadable example csv
+- [ ] import csv of cosdna links
+- [ ] web columns of csv links
+- [ ] make faq page
+- [ ] skincare refs page
 
 # refs
 i haven't written a webapp in so long and i refuse to write in javascript so i need to consult beginner tutorials that i am compiling here:
