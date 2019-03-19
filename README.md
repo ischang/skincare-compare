@@ -3,11 +3,13 @@ my 20+ something yr old skin is as sensitive as an angsty teenager and throws ta
 
 # plan
 - techy stuff:
-i'll probably use python flask since i prefer writing in python (for simple things). for the front-end, probably twitter bootstrap and vanilla js and nothing fancy bc i don't want to deal w node or react or w/e. i'm basically going to render a static page and just dump it into the flask app to process
+~i'll probably use python flask since i prefer writing in python (for simple things). for the front-end, probably twitter bootstrap and vanilla js and nothing fancy bc i don't want to deal w node or react or w/e. i'm basically going to render a static page and just dump it into the flask app to process
 
 will probably deploy w heroku bc unfortunately, github pages only renders static apps. i guess i could write the backend with javascript but why would i 
 
-don't forget requirements.txt 
+don't forget requirements.txt~
+
+after consulting w a js goddess, i'm probably just going to draw a transmutation circle and code this all in vanilla js + twitter bootstrap just so i can host this on gh pages and hope it turns out ok bc i'm lazy 
 
 # features:
 ## BASIC FEATURES 
