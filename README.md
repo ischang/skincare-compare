@@ -3,11 +3,11 @@ my 20+ something yr old skin is as sensitive as an angsty teenager and throws ta
 
 # plan
 - techy stuff:
-~i'll probably use python flask since i prefer writing in python (for simple things). for the front-end, probably twitter bootstrap and vanilla js and nothing fancy bc i don't want to deal w node or react or w/e. i'm basically going to render a static page and just dump it into the flask app to process
+~~i'll probably use python flask since i prefer writing in python (for simple things). for the front-end, probably twitter bootstrap and vanilla js and nothing fancy bc i don't want to deal w node or react or w/e. i'm basically going to render a static page and just dump it into the flask app to process
 
-will probably deploy w heroku bc unfortunately, github pages only renders static apps. i guess i could write the backend with javascript but why would i 
+~~will probably deploy w heroku bc unfortunately, github pages only renders static apps. i guess i could write the backend with javascript but why would i 
 
-don't forget requirements.txt~
+~~don't forget requirements.txt
 
 after consulting w a js goddess, i'm probably just going to draw a transmutation circle and code this all in vanilla js + twitter bootstrap just so i can host this on gh pages and hope it turns out ok bc i'm lazy 
 
@@ -33,5 +33,4 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 
 # refs
 i haven't written a webapp in so long and i refuse to write in javascript so i need to consult beginner tutorials that i am compiling here:
-- https://realpython.com/introduction-to-flask-part-1-setting-up-a-static-site/
-- https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe
+somewhat inspired by: https://github.com/ytilis/CosDNA_Compare/blob/master/cosdna.js
