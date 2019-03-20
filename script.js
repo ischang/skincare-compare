@@ -1,6 +1,7 @@
 var waterList = ["aqua", "eau", "water", "h20"];
 var goodWords = ["safe", "good", "yes"];
 var badWords = ["allergic", "bad", "no"];
+var errors = [];
 
 $(document).ready(function() {
   // The event listener for the file upload
@@ -25,6 +26,9 @@ $(document).ready(function() {
 
         if (data && data.length > 0) {
           console.log(handleData(data));
+          if (errors.length > 0) {
+            alert(errors);
+          }
           alert('Imported -' + data.length + '- rows successfully!');
         } else {
           alert('No data to import!');
@@ -43,7 +47,7 @@ $(document).ready(function() {
 
     try {
       csvDataArray.forEach(function (csvObject) {
-        let result = csvObject["Result"].toLowerCase();
+        let result = csvObject["Result"].toString().toLowerCase();
 
         if (result !== "tbd") {
           if (goodWords.includes(result)) {
@@ -56,7 +60,8 @@ $(document).ready(function() {
         }
       });
     } catch (error) {
-      alert("You a) might not have a \'Result\' column, b) misspelled your column, or c) one of your results is empty: please fill in \'safe\', \'good'\, \'yes\', \'no'\, \'bad\', \'allergic\', or \'tbd\'");
+      console.log(error);
+      errors.push("You a) might not have a \'Result\' column, b) misspelled your column, or c) one of your results is empty: please fill in \'safe\', \'good'\, \'yes\', \'no'\, \'bad\', \'allergic\', or \'tbd\'");
     }
 
     //option 2
@@ -77,7 +82,8 @@ $(document).ready(function() {
 
   function iterateThroughDictionary(ingredients, dict) {
     try {
-      let ingredientsArray = ingredients.split(/[ ,]+/);
+      //splits by comma, space, and removes empty string
+      let ingredientsArray = ingredients.split(/[ ,]+/).filter(Boolean);
 
       ingredientsArray.forEach(function (listIngredient) {
         var ingredient = listIngredient.toLowerCase();
@@ -89,10 +95,10 @@ $(document).ready(function() {
         dict[ingredient] = dict[ingredient] ? dict[ingredient]+1 : 1;
       });
     } catch (error) {
-      alert("You may not have an \'Ingredients\' column.")
-      die(error);
+      console.log(error)
+      //will do this twice unless i do this check outside
+      errors.push("You do not have an \'Ingredients\' column")
     }
-
 
     return dict;
   }
