@@ -15,26 +15,45 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 # features:
 ## BASIC FEATURES 
   - basically, do a compare and extract all the common bad ingredients and all the 'good' ingrediennts
-     - possibly cross reference them on cosdna and https://www.sezia.co/
+  - let user download basic spreadsheet in csv with exclusions 
+  - fix error msgs
  ## FIRST STEPS FOR A BASIC APP
-   - import a csv first, and compare ingredients based on commas with columns of bad/good (cause i already have a very intensive doc) 
-  - maybe allow import from google docs 
+  - import a csv first, and compare ingredients based on commas with columns of bad/good (cause i already have a very intensive doc) 
  ## LATER FEATURES 
-  - import a csv of cosdna links with columns of bad/good 
-    - requires some nifty web scraping
-  - later just maybe do columns in the web app so you don't have to import?
-  - maybe a chrome extension because i hate myself 
-
+  - Import options
+    - google docs
+  - options of what to merge or not merge (dropdown link)
+    - //option 1: to grab complete spreadsheet on both
+    - //option 2: grab spreadsheet with exclusions -- if the ingredient is on the "safe" list, then it will not occur on the "allergic" list
+    - //option 3: grab spreadsheet with just counts on both
+    - //still want them to get spreadsheet with one misspelled or empty, so remove modal alerts and just print to page
+  - Other downloadable options 
+    - download as txt
+  - Resources page
+    - cosdna
+    - https://www.sezia.co/
+    - haven't gotten this to work but: https://github.com/ytilis/CosDNA_Compare/blob/master/cosdna.js
+    - different bloggers i like
+    - subreddits
+  - Examples
+    - csv example
+    - Google Docs example
+    - CosDna examples
+  - Web scraping
+     - import a csv of cosdna links with columns of bad/good 
+        - requires some nifty web scraping
+  - Inline ingredients compare:
+    - later just maybe do columns in the web app so you don't have to import?
 
 # checklist for la basic app
-- [ ] get js script wrking purely w csv
-- [ ] have it spit out on page the common ingredients
-- [ ] possibly export to txt document or csv
-- [ ] then google docs link
+- [x] get js script wrking purely w csv and spits out in console
+- [ ] spit out on page (like a table) the common ingredients for top 15-20? rest you have to download
+- [ ] download to txt document or csv
 - [ ] make front-end pretty + simple
 - [ ] deploy to gh pages
 
 # checklist for when la basic app works 
+- [ ] then google docs link
 - [ ] downloadable example csv
 - [ ] import csv of cosdna links
 - [ ] web columns of csv links
@@ -44,3 +63,5 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 # refs
 i haven't written a webapp in so long and i refuse to write in javascript so i need to consult beginner tutorials that i am compiling here:
 somewhat inspired by: https://github.com/ytilis/CosDNA_Compare/blob/master/cosdna.js
+- https://stackoverflow.com/questions/3665115/create-a-file-in-memory-for-user-to-download-not-through-server
+
