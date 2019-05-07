@@ -4,6 +4,8 @@ var badWords = ["allergic", "bad", "no"];
 var errors = [];
 
 $(document).ready(function() {
+  //TODO: remove alerts after testing is done
+
   // The event listener for the file upload
   document.getElementById('csvFileUpload').addEventListener('input', uploadCsvFile, false);
 
@@ -15,7 +17,8 @@ $(document).ready(function() {
   // Method that reads and processes the selected file
   function uploadCsvFile(event) {
     if (!doesBrowserSupportFileUpload()) {
-      alert('Your browser/browser version is not compatible with the File API. Please refer to https://caniuse.com/#feat=filereader');
+      console.log("Your brower is not compatible")
+      errors.push('Your browser/browser version is not compatible with the File API. Please refer to https://caniuse.com/#feat=filereader');
     } else {
       var data = null;
       var reader = new FileReader();
@@ -26,18 +29,26 @@ $(document).ready(function() {
 
         if (data && data.length > 0) {
           console.log(handleData(data));
-          if (errors.length > 0) {
-            alert(errors);
+
+          if(errors.length > 0) {
+            console.log("there are errors");
+          } else {
+            console.log('Imported -' + data.length + '- rows successfully!');
           }
-          alert('Imported -' + data.length + '- rows successfully!');
         } else {
-          alert('No data to import!');
+          errors.push("No data to import!");
+          console.log('No data to import!');
         }
       };
 
       reader.onerror = function () {
-        alert('Unable to read ' + file.fileName);
+        errors.push("Unable to read file");
+        console.log('Unable to read ' + file.fileName);
       };
+    }
+
+    if (errors.length > 0) {
+      console.log(errors);
     }
   }
 
