@@ -1,0 +1,28 @@
+body {
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-image: url(../img/bg1.jpg);
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: white;
+    height: 100%;
+}
+
+.aboutLinks {
+    text-align: center;
+    align-items: center;
+}
+
+.link {
+    padding: 30px;
+}
+
+#titleName{
+    text-align: center;
+}
