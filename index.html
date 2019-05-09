@@ -3,15 +3,16 @@
 	  <title>Skincare Compare</title>
 	  <!-- CSS -->
 		<link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway:400,700" rel="stylesheet">
         <link rel="stylesheet" href = "assets/css/custom.css">
-
 	  <!--JQUERY-->
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
       <!--CUSTOM-->
-        <script src="script.js"></script>
+        <script src="scripts/script.js"></script>
+        <script src="scripts/tableScript.js"></script>
+        <script src="scripts/handleDataScript.js"></script>
 
     </head>
 	<body>
@@ -20,7 +21,7 @@
             <h3>
                 <div class = "aboutLinks">
                     <a class = "link" href="./index.html">home</a>
-                    <text style="color: midnightblue;"> | </text>
+                    <text style="color: midnightblue; font-weight: bold;"> | </text>
                     <a class = "link" href="./resources.html">references</a>
                 </div>
             </h3>
@@ -29,8 +30,9 @@
                 <div class="input-group" id="formInput">
                     <label class="input-group-btn">
                         <span class="btn btn-custom">
-                            Upload CSV&hellip; <input type="file" style="display: none;" id="csvFileUpload" accept=".csv"
-                                                  onchange="setFileNameOnUpload(this)">
+                            Upload CSV . . .  <input type="file" style="display: none;"
+                                                      id="csvFileUpload" accept=".csv" oninput="uploadCsvFile(event)"
+                                                      onchange="setFileNameOnUpload(this)">
                         </span>
                     </label>
                     <input type="text" id="uploadFileInfo" class="form-control" readonly>
@@ -38,9 +40,35 @@
             </div>
             <div class="tableDiv">
                 <h3>Safe Ingredients</h3>
-                <div class="safeListTable"></div>
+                <div class="safeListTable">
+                    <table class="table" style="width:60%">
+                        <thead>
+                            <tr>
+                                 <th scope="col">Ingredient</th>
+                                 <th scope="col">#</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <form onsubmit="download(this['name'].value, 'safeLis')">
+                    <input type="text" name="name" value="safeList.csv">
+                    <input type="submit" value="Download">
+                </form>
                 <h3>Allergic Ingredients</h3>
-                <div class="allergicListTable"></div>
+                <div class="allergicListTable">
+                   <table class="table" style="width:60%">
+                       <thead>
+                            <tr>
+                                <th>Ingredient</th>
+                                <th>#</th>
+                            </tr>
+                       </thead>
+                   </table>
+                </div>
+                <form onsubmit="download(this['name'].value, 'safeLis')">
+                    <input type="text" name="name" value="allergicList.csv">
+                    <input type="submit" value="Download">
+                </form>
             </div>
         </div>
 	</body>
