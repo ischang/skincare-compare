@@ -3,6 +3,7 @@
 	  <title>Skincare Compare</title>
 	  <!-- CSS -->
 		<link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway" rel="stylesheet">
         <link rel="stylesheet" href = "assets/css/custom.css">
 
 	  <!--JQUERY-->
@@ -19,17 +20,30 @@
             <h3>
                 <div class = "aboutLinks">
                     <a class = "link" href="./index.html">home</a>
-                    <text> | </text>
+                    <text style="color: midnightblue;"> | </text>
                     <a class = "link" href="./resources.html">references</a>
                 </div>
             </h3>
-            <div class="fileUpload" id="importDiv">
-                <legend>Upload Your CSV File</legend>
-                <input type="file" name="File Upload" id="csvFileUpload" accept=".csv" />
+            <br>
+            <div class="inputWrapper">
+                <div class="input-group" id="formInput">
+                    <label class="input-group-btn">
+                        <span class="btn btn-custom">
+                            Upload CSV&hellip; <input type="file" style="display: none;" id="csvFileUpload" accept=".csv"
+                                                  onchange="setFileNameOnUpload(this)">
+                        </span>
+                    </label>
+                    <input type="text" id="uploadFileInfo" class="form-control" readonly>
+                </div>
             </div>
-            <div class="fileDownload">
-                <h3></h3>
+            <div class="tableDiv">
+                <h3>Safe Ingredients</h3>
+                <div class="safeListTable"></div>
+                <h3>Allergic Ingredients</h3>
+                <div class="allergicListTable"></div>
             </div>
         </div>
 	</body>
 </html>
+
+
