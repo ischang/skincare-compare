@@ -2,7 +2,7 @@ body {
     display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /*justify-content: center;*/
 
     background-image: url(../img/bg1.jpg);
 
@@ -12,6 +12,8 @@ body {
     background-size: cover;
     background-color: white;
     height: 100%;
+
+    font-family:"Raleway", sans-serif;
 }
 
 .aboutLinks {
@@ -25,4 +27,36 @@ body {
 
 #titleName{
     text-align: center;
+}
+
+h1 {
+    font-family:"Poppins", sans-serif;
+    padding-top: 50px;
+    font-size: 70px;
+}
+
+h3 {
+    font-family: "Poppins", sans-serif;
+}
+
+.inputWrapper{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#titleName{
+    text-shadow: 2px 2px 2px steelblue;
+    color: midnightblue;
+    text-align: center;
+}
+
+#uploadFileInfo {
+    width: 200px;
+}
+
+.btn-custom{
+    background: lightskyblue;
+    color: black;
+    outline: lightskyblue;
 }
