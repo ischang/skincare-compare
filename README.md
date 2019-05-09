@@ -47,10 +47,10 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 
 # checklist for la basic app
 - [x] get js script wrking purely w csv and spits out in console
-- [ ] spit out on page (like a table) the common ingredients for top 15-20? rest you have to download
+- [x] spit out on page (like a table) the common ingredients for top 10? 
 - [ ] download to txt document or csv
-- [ ] make front-end pretty + simple
-- [ ] deploy to gh pages
+- [x] make front-end pretty + simple
+- [x] deploy to gh pages
 
 # checklist for when la basic app works 
 - [ ] then google docs link
