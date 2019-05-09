@@ -37,6 +37,7 @@ h1 {
 
 h3 {
     font-family: "Poppins", sans-serif;
+    color: midnightblue;
 }
 
 .inputWrapper{
@@ -56,7 +57,16 @@ h3 {
 }
 
 .btn-custom{
-    background: lightskyblue;
+    background: skyblue;
     color: black;
-    outline: lightskyblue;
+    font-family: Poppins;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: lightblue;
+}
+
+form * {
+    display: block;
+    margin: 10px;
 }
