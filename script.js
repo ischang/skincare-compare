@@ -3,11 +3,16 @@ var goodWords = ["safe", "good", "yes"];
 var badWords = ["allergic", "bad", "no"];
 var errors = [];
 
+function setFileNameOnUpload(file) {
+  $('#uploadFileInfo').val(file.files[0].name)
+}
+
 $(document).ready(function() {
   //TODO: remove alerts after testing is done
 
   // The event listener for the file upload
   document.getElementById('csvFileUpload').addEventListener('input', uploadCsvFile, false);
+
 
   // Method that checks that the browser supports the HTML5 File API
   function doesBrowserSupportFileUpload() {
@@ -28,10 +33,18 @@ $(document).ready(function() {
         data = $.csv.toObjects(csvData.target.result);
 
         if (data && data.length > 0) {
+          let lists = handleData(data);
+          for (let key in lists.safeList) {
+            console.log(key);
+            console.log(lists.safeList[key]);
+          }
           console.log(handleData(data));
 
+          setDataAsTable(lists.safeList, "safeList");
+          setDataAsTable(lists.allergicList, "allergicList");
+
           if(errors.length > 0) {
-            console.log("there are errors");
+            console.log("There are errors");
           } else {
             console.log('Imported -' + data.length + '- rows successfully!');
           }
@@ -89,6 +102,66 @@ $(document).ready(function() {
       safeList: safeList,
       allergicList: allergicList
     };
+  }
+
+  function setDataAsTable(ingredientList, listName) {
+    var html = "<div class='table-responsive'>";
+    html+= "<table class='table' style='width:60%'>";
+
+    html = setTableHeader(html);
+    html = setTableBody(html, ingredientList);
+
+    html+= "</table>";
+    html+= "</div>";
+
+    listName = "." + listName + "Table";
+
+    $(listName).html(html);
+  }
+
+  function setTableBody(html, ingredientList) {
+    html += "<tbody>";
+    var minList = sortMinListAsArray(ingredientList);
+
+    for (var i = 0; i < minList.length; i++) {
+      html+= "<tr>";
+      html+= "<td>" + minList[i][0] + "</td>";
+      html+= "<td>" + minList[i][1] + "</td>";
+      html+= "</tr>";
+    }
+
+    html+= "</tbody>";
+
+    console.log(html);
+
+    return html;
+  }
+
+  function sortMinListAsArray(ingredientList) {
+    var items = Object.keys(ingredientList).map(function(key) {
+      return [key, ingredientList[key]];
+    });
+
+    items.sort(function(first, second) {
+      return second[1] - first[1];
+    });
+
+    return items.slice(0, setMinTableLength(ingredientList.length));
+  }
+
+  function setMinTableLength(listLength) {
+    return listLength < 10 ? listLength : 10;
+  }
+
+  function setTableHeader(html) {
+    html+="<thead>";
+    html+="<tr>";
+    html+="<th>Ingredient</th>";
+    html+="<th>#</th>";
+    html+="</tr>";
+    html+="</thead>";
+
+    return html;
   }
 
   function iterateThroughDictionary(ingredients, dict) {
