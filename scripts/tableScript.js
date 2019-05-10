@@ -25,7 +25,7 @@ function setTableHeader(html) {
 
 function setTableBody(html, ingredientList) {
   html += "<tbody>";
-  var minList = sortIngredientListAsArray(ingredientList);
+  let minList = returnMinTableList(ingredientList)
 
   for (var i = 0; i < minList.length; i++) {
     html+= "<tr>";
@@ -40,13 +40,20 @@ function setTableBody(html, ingredientList) {
 }
 
 function sortIngredientListAsArray(ingredientList) {
-  var items = Object.keys(ingredientList).map(function(key) {
+  let items = Object.keys(ingredientList).map(function(key) {
     return [key, ingredientList[key]];
   });
 
   items.sort(function(first, second) {
     return second[1] - first[1];
   });
+
+  return items;
+}
+
+
+function returnMinTableList(ingredientList) {
+  let items = sortIngredientListAsArray(ingredientList);
 
   return items.slice(0, setMinTableLength(ingredientList.length));
 }

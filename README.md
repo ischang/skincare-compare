@@ -48,15 +48,15 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 # checklist for la basic app
 - [x] get js script wrking purely w csv and spits out in console
 - [x] spit out on page (like a table) the common ingredients for top 10? 
-- [ ] download to txt document or csv
+- [x] download to txt document or csv
 - [x] make front-end pretty + simple
 - [x] deploy to gh pages
 
 # checklist for when la basic app works 
-- [ ] then google docs link
 - [ ] downloadable example csv
 - [ ] import csv of cosdna links
 - [ ] web columns of csv links
+- [ ] test various cases
 - [ ] make faq page
 - [ ] skincare refs page
 

@@ -13,7 +13,7 @@ body {
     background-color: white;
     height: 100%;
 
-    font-family:"Raleway", sans-serif;
+    font-family:"Arial", sans-serif;
 }
 
 .aboutLinks {
@@ -40,6 +40,24 @@ h3 {
     color: midnightblue;
 }
 
+a {
+    color: purple;
+}
+
+a:hover{
+    color: rebeccapurple;
+    text-decoration: none;
+}
+
+a.title {
+    text-decoration: none;
+    color: inherit;
+}
+
+a.title:hover{
+    color:inherit;
+}
+
 .inputWrapper{
     display:flex;
     align-items: center;
@@ -56,9 +74,13 @@ h3 {
     width: 200px;
 }
 
+.form-control{
+    width: 150px;
+}
+
 .btn-custom{
     background: skyblue;
-    color: black;
+    color: midnightblue;
     font-family: Poppins;
 }
 
@@ -66,7 +88,27 @@ h3 {
     background-color: lightblue;
 }
 
-form * {
-    display: block;
-    margin: 10px;
+*:focus {
+    outline: 0 !important;
+}
+
+form {
+    display: flex; /* 2. display flex to the rescue */
+    flex-direction: row;
+    padding-right:50px;
+    /*display: block;*/
+    /*margin: 10px;*/
+}
+
+label, input {
+    display: block; /* 1. oh noes, my inputs are styled as block... */
+}
+
+/* header */
+.table > thead > tr > th {
+    border-bottom: 2px solid white;
+}
+/* rows */
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 1px solid white;
 }
