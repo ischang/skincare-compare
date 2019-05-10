@@ -17,7 +17,7 @@
     </head>
 	<body>
         <div class="container">
-            <h1><div id="titleName">Skincare Compare</div></h1>
+            <h1><div id="titleName"><a class="title" href="./index.html"> Skincare Compare </a></div></h1>
             <h3>
                 <div class = "aboutLinks">
                     <a class = "link" href="./index.html">home</a>
@@ -52,9 +52,9 @@
                         </thead>
                     </table>
                 </div>
-                <form onsubmit="download(this['name'].value, 'safeLis')">
-                    <input type="text" name="name" value="safeList.csv">
-                    <input type="submit" value="Download">
+                <form onsubmit="download(this['name'].value, 'safeList', event)">
+                    <input type="text" class="form-control" name="name" placeholder="filename">
+                    <input type="submit" id="downloadSafe" class="btn btn-custom" value="Download">
                 </form>
                 <h3>Allergic Ingredients</h3>
                 <div class="allergicListTable">
@@ -67,13 +67,12 @@
                        </thead>
                    </table>
                 </div>
-                <form onsubmit="download(this['name'].value, 'safeLis')">
-                    <input type="text" name="name" value="allergicList.csv">
-                    <input type="submit" value="Download">
+                <form onsubmit="download(this['name'].value, 'allergicList', event)">
+                    <input type="text" class="form-control" name="name" placeholder="filename" vale="al">
+                    <input type="submit" class="btn btn-custom" value="Download">
                 </form>
             </div>
         </div>
 	</body>
 </html>
-
 
