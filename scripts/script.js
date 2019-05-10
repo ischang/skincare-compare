@@ -54,16 +54,40 @@ function setFileNameOnUpload(file) {
   $('#uploadFileInfo').val(file.files[0].name)
 }
 
-function download(filename, listName) {
-  console.log(lists[listName]);
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/csv;charset=UTF-8' + encodeURIComponent());
-  element.setAttribute('download', filename);
+function download(filename, listName, event) {
+  event.preventDefault();
 
-  element.style.display = 'none';
-  document.body.appendChild(element);
+  if (lists === undefined) {
+    window.alert("You need to upload a CSV first!");
+  }
 
-  element.click();
+  let csvContent = createCsvContent(sortIngredientListAsArray(lists[listName]));
+  let blob = new Blob([csvContent], {type: 'text/csv'});
 
-  document.body.removeChild(element);
+  if(window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveBlob(blob, filename);
+  }
+
+  else{
+    let elem = window.document.createElement('a');
+
+    elem.href = window.URL.createObjectURL(blob);
+    elem.download = filename;
+
+    document.body.appendChild(elem);
+    elem.click();
+    document.body.removeChild(elem);
+  }
+}
+
+function createCsvContent(list) {
+  let lineArray = [];
+
+  lineArray.push("Ingredient,#");
+
+  list.forEach(function (infoArray) {
+    lineArray.push(infoArray.join(","));
+  });
+
+  return lineArray.join("\n");
 }
