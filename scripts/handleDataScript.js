@@ -40,7 +40,7 @@ function handleData(csvDataArray) {
 function iterateThroughDictionary(ingredients, dict) {
   try {
     //splits by comma, space, and removes empty string
-    let ingredientsArray = ingredients.split(/[ ,]+/).filter(Boolean);
+    let ingredientsArray = ingredients.split(/[,]+/).filter(Boolean);
 
     ingredientsArray.forEach(function (listIngredient) {
       var ingredient = listIngredient.toLowerCase();
