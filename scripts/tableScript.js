@@ -7,7 +7,8 @@ function setDataAsTable(ingredientList, listName) {
 
   html+= "</table>";
   html+="</div>";
-  listName = "." + listName + "Table";
+  console.log(html);
+  listName = "#" + listName + "Table";
 
   $(listName).html(html);
 }
@@ -25,7 +26,7 @@ function setTableHeader(html) {
 
 function setTableBody(html, ingredientList) {
   html += "<tbody>";
-  let minList = returnMinTableList(ingredientList)
+  let minList = returnMinTableList(ingredientList);
 
   for (var i = 0; i < minList.length; i++) {
     html+= "<tr>";

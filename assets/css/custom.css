@@ -16,6 +16,13 @@ body {
     font-family:"Arial", sans-serif;
 }
 
+/******HEADER******/
+#titleName{
+    text-shadow: 2px 2px 2px steelblue;
+    color: midnightblue;
+    text-align: center;
+}
+
 .aboutLinks {
     text-align: center;
     align-items: center;
@@ -25,10 +32,7 @@ body {
     padding: 30px;
 }
 
-#titleName{
-    text-align: center;
-}
-
+/******DEFAULT CHANGE******/
 h1 {
     font-family:"Poppins", sans-serif;
     padding-top: 50px;
@@ -40,6 +44,11 @@ h3 {
     color: midnightblue;
 }
 
+h4 {
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    color: rebeccapurple;
+}
 a {
     color: purple;
 }
@@ -58,24 +67,37 @@ a.title:hover{
     color:inherit;
 }
 
-.inputWrapper{
+/******UPLOAD FORM******/
+#uploadInputWrapper{
     display:flex;
     align-items: center;
     justify-content: center;
-}
-
-#titleName{
-    text-shadow: 2px 2px 2px steelblue;
-    color: midnightblue;
-    text-align: center;
 }
 
 #uploadFileInfo {
     width: 200px;
 }
 
+/******DOWNLOAD FORM******/
+
+/* adding to bootstrap*/
 .form-control{
     width: 150px;
+}
+
+/* adding to default? */
+.radio {
+    font-family: "Poppins", sans-serif;
+}
+
+.filenameInputWrapper {
+    margin-right: 5px;
+}
+
+.formClass {
+    display: flex;
+    flex-direction: row;
+    padding-right: 30px;
 }
 
 .btn-custom{
@@ -84,24 +106,25 @@ a.title:hover{
     font-family: Poppins;
 }
 
+/*label, input {*/
+/*display: block; !* 1. oh noes, my inputs are styled as block... *!*/
+/*}*/
+
+
+/******TABLE******/
+
+.table {
+    width: 60%;
+}
+
+/* table border override */
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: lightblue;
 }
 
+/* table border override */
 *:focus {
     outline: 0 !important;
-}
-
-form {
-    display: flex; /* 2. display flex to the rescue */
-    flex-direction: row;
-    padding-right:50px;
-    /*display: block;*/
-    /*margin: 10px;*/
-}
-
-label, input {
-    display: block; /* 1. oh noes, my inputs are styled as block... */
 }
 
 /* header */
@@ -112,3 +135,10 @@ label, input {
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     border-top: 1px solid white;
 }
+
+
+
+
+
+
+
