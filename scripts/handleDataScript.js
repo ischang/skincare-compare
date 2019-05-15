@@ -1,6 +1,60 @@
 function handleData(csvDataArray) {
-  var safeList = new Object();
-  var allergicList = new Object();
+  let dataLists = {};
+  let safeAllergicLists = createSafeAllergicLists(csvDataArray);
+
+  dataLists["sharedList"] = createSharedList(csvDataArray);
+  dataLists["allergicList"] = safeAllergicLists.allergicList;
+  dataLists["safeList"] = safeAllergicLists.safeList;
+
+  if (dataLists.allergicList && dataLists.safeList) {
+    let excluseLists = createExclusiveSafeAllergicLists(dataLists);
+    dataLists["safeListWithoutAllergic"] =  excluseLists.safeListWithoutAllergic;
+    dataLists["allergicListWithoutSafe"] = excluseLists.allergicListWithoutSafe;
+  }
+
+  return dataLists;
+}
+
+function createExclusiveSafeAllergicLists (dataLists) {
+  let allergicListWithoutSafe = dataLists.allergicList;
+  let safeListWithoutAllergic = dataLists.safeList;
+
+  for (let key in lists.allergicList) {
+    if (key in lists.safeList) {
+      delete allergicListWithoutSafe[key];
+    }
+  }
+
+  for (let key in lists.safeList) {
+    if (key in lists.allergicList) {
+      delete safeListWithoutAllergic[key];
+    }
+  }
+
+  return {
+    safeListWithoutAllergic: safeListWithoutAllergic,
+    allergicListWithoutSafe: allergicListWithoutSafe
+  }
+}
+
+function createSharedList (csvDataArray) {
+  let sharedList = new Object();
+
+  try {
+    csvDataArray.forEach(function (csvObject) {
+      sharedList = iterateThroughDictionary(csvObject["Ingredients"], sharedList);
+    })
+  } catch (error) {
+    console.log(error);
+    errors.push("You might have a) misspelled your column");
+  }
+
+  return sharedList;
+}
+
+function createSafeAllergicLists(csvDataArray) {
+  let safeList = new Object();
+  let allergicList = new Object();
 
   try {
     csvDataArray.forEach(function (csvObject) {
@@ -16,25 +70,17 @@ function handleData(csvDataArray) {
         }
       }
     });
+
   } catch (error) {
     console.log(error);
     errors.push("You a) might not have a \'Result\' column, b) misspelled your column, or c) one of your results is empty: please fill in \'safe\', \'good'\, \'yes\', \'no'\, \'bad\', \'allergic\', or \'tbd\'");
   }
 
-  //option 2
-  for(let key in allergicList) {
-    if (key in safeList) {
-      delete allergicList[key];
-    }
-  }
-
-  //option 3
-  //just iterate through + add
-
   return {
     safeList: safeList,
     allergicList: allergicList
   };
+
 }
 
 function iterateThroughDictionary(ingredients, dict) {
@@ -42,6 +88,7 @@ function iterateThroughDictionary(ingredients, dict) {
     //splits by comma, space, and removes empty string
     let ingredientsArray = ingredients.split(/[,]+/).filter(Boolean);
 
+   ///^[ A-Za-z0-9_@./#&+-]*$/
     ingredientsArray.forEach(function (listIngredient) {
       var ingredient = listIngredient.toLowerCase();
 

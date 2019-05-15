@@ -53,10 +53,10 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 - [x] deploy to gh pages
 
 # checklist for when la basic app works 
-- [ ] add 3 options for download with dropdown in second column: 
+- [x] add 3 options for download with dropdown in second column: 
 - [x] 1) 2 sheets: shared for all good, shared for all bad 
-- [ ] 2) 2 sheets: all the good ingredients without the bad ingredients, all the bad ingredients - good one 
-- [ ] 3) ignores result column and just finds all common ingredients into one download
+- [x] 2) 2 sheets: all the good ingredients without the bad ingredients, all the bad ingredients - good one 
+- [x] 3) ignores result column and just finds all common ingredients into one download
 - [ ] downloadable example csv
 - [ ] cosdna scraping support 
 - [ ] test various cases (see below)
@@ -64,6 +64,7 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 - [ ] make quick 2 compare page (for two columns, either cosdna or ingredient list delimited by commas) with two columns 
 
 # to test and do for readiness:
+- [ ] water (need to fully sanitize)
 - [ ] sanitize inputs for special characters (v strange)
 - [ ] add exception for "1,2..." 
 - [ ] testing bigger spreadsheets with more columns and various edge cases for the merge
