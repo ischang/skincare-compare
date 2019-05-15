@@ -28,7 +28,7 @@
                 </div>
             </h3>
             <br>
-            <div class="inputWrapper">
+            <div id="uploadInputWrapper">
                 <div class="input-group" id="formInput">
                     <label class="input-group-btn">
                         <span class="btn btn-custom">
@@ -42,7 +42,7 @@
             </div>
             <div class="tableDiv">
                 <h3>Safe Ingredients</h3>
-                <div class="safeListTable">
+                <div id="safeListTable">
                     <table class="table" style="width:60%">
                         <thead>
                             <tr>
@@ -52,13 +52,24 @@
                         </thead>
                     </table>
                 </div>
-                <form onsubmit="download(this['name'].value, 'safeList', event)">
-                    <input type="text" class="form-control" name="name" placeholder="filename">
-                    <input type="submit" id="downloadSafe" class="btn btn-custom" value="Download">
-                </form>
+                <div class="downloadInputWrapper">
+                    <h4>Download Options</h4>
+                    <div class="safeRadios">
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" checked>safe ingredients list</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio">safe ingredients list, without allergic ingredients</label>
+                        </div>
+                    </div>
+                    <form class="formClass" onsubmit="download(this['name'].value, 'safeList', event)">
+                        <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename"></div>
+                        <input type="submit" id="downloadSafe" class="btn btn-custom" value="Download">
+                    </form>
+                </div>
                 <h3>Allergic Ingredients</h3>
-                <div class="allergicListTable">
-                   <table class="table" style="width:60%">
+                <div id="allergicListTable">
+                   <table class="table">
                        <thead>
                             <tr>
                                 <th>Ingredient</th>
@@ -67,8 +78,23 @@
                        </thead>
                    </table>
                 </div>
-                <form onsubmit="download(this['name'].value, 'allergicList', event)">
-                    <input type="text" class="form-control" name="name" placeholder="filename" vale="al">
+                <form class="formClass" onsubmit="download(this['name'].value, 'allergicList', event)">
+                    <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename"></div>
+                    <input type="submit" class="btn btn-custom" value="Download">
+                </form>
+                <h3>Shared Ingredients</h3>
+                <div id="sharedListTable">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Ingredient</th>
+                            <th>#</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <form class="formClass" onsubmit="download(this['name'].value, 'sharedList', event)">
+                    <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename"></div>
                     <input type="submit" class="btn btn-custom" value="Download">
                 </form>
             </div>
@@ -76,3 +102,20 @@
 	</body>
 </html>
 
+<!--<form class="form-inline">-->
+    <!--<div class="form-group mb-2">-->
+        <!--<label for="staticEmail2" class="sr-only">Email</label>-->
+        <!--<input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">-->
+    <!--</div>-->
+    <!--<div class="form-group mx-sm-3 mb-2">-->
+        <!--<label for="inputPassword2" class="sr-only">Password</label>-->
+        <!--<input type="password" class="form-control" id="inputPassword2" placeholder="Password">-->
+    <!--</div>-->
+    <!--<button type="submit" class="btn btn-primary mb-2">Confirm identity</button>-->
+<!--</form>-->
+<!--<form class="form-inline">-->
+    <!--<form class="form-group mb-2" onsubmit="download(this['name'].value, 'safeList', event)">-->
+        <!--<input type="text" class="form-control" name="name" placeholder="filename">-->
+        <!--<input type="submit" id="downloadSafe2" class="btn btn-custom" value="Download">-->
+    <!--</form>-->
+<!--</form>-->

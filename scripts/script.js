@@ -1,8 +1,8 @@
-var waterList = ["aqua", "eau", "water", "h20"];
-var goodWords = ["safe", "good", "yes"];
-var badWords = ["allergic", "bad", "no"];
-var errors = [];
-var lists;
+let waterList = ["aqua", "eau", "water", "h20"];
+let goodWords = ["safe", "good", "yes"];
+let badWords = ["allergic", "bad", "no"];
+let errors = [];
+let lists = {};
 
 // Method that reads and processes the selected file
 function uploadCsvFile(event) {
@@ -22,6 +22,7 @@ function uploadCsvFile(event) {
 
         setDataAsTable(lists.safeList, "safeList");
         setDataAsTable(lists.allergicList, "allergicList");
+        setDataAsTable(lists.sharedList, "sharedList");
 
         if(errors.length > 0) {
           console.log("There are errors");
@@ -57,11 +58,12 @@ function setFileNameOnUpload(file) {
 function download(filename, listName, event) {
   event.preventDefault();
 
-  if (lists === undefined) {
+  if (Object.keys(lists).length == 0) {
     window.alert("You need to upload a CSV first!");
   }
 
   let csvContent = createCsvContent(sortIngredientListAsArray(lists[listName]));
+  csvContent = csvContent.replace(/[\u0300-\u036f]/g, "")
   let blob = new Blob([csvContent], {type: 'text/csv'});
 
   if(window.navigator.msSaveOrOpenBlob) {
@@ -72,6 +74,9 @@ function download(filename, listName, event) {
     let elem = window.document.createElement('a');
 
     elem.href = window.URL.createObjectURL(blob);
+
+    // element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+
     elem.download = filename;
 
     document.body.appendChild(elem);
