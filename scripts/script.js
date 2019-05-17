@@ -1,4 +1,4 @@
-let waterList = ["aqua", "eau", "water", "h20"];
+let waterList = ["aqua", "eau", "water", "h20", "purified water"];
 let goodWords = ["safe", "good", "yes"];
 let badWords = ["allergic", "bad", "no"];
 let errors = [];
@@ -10,8 +10,8 @@ function uploadCsvFile(event) {
     console.log("Your brower is not compatible")
     errors.push('Your browser/browser version is not compatible with the File API. Please refer to https://caniuse.com/#feat=filereader');
   } else {
-    var data = null;
-    var reader = new FileReader();
+    let data = null;
+    let reader = new FileReader();
     reader.readAsText(event.target.files[0]);
 
     reader.onload = function (csvData) {
@@ -55,6 +55,14 @@ function setFileNameOnUpload(file) {
   $('#uploadFileInfo').val(file.files[0].name)
 }
 
+function isDefaultList(listname) {
+  if (listname == "safeList") {
+    console.log(document.getElementById("safeRadio").checked);
+    return document.getElementById("safeRadio").checked;
+  } else if (listname == "allergicList") {
+    return document.getElementById("allergicRadio").checked;
+  }
+}
 function download(filename, listName, event) {
   event.preventDefault();
 
@@ -62,9 +70,12 @@ function download(filename, listName, event) {
     window.alert("You need to upload a CSV first!");
   }
 
+  if (listName != "sharedList" && !isDefaultList(listName)) {
+    listName = listName+"Exclusive";
+  }
+
   let csvContent = createCsvContent(sortIngredientListAsArray(lists[listName]));
-  csvContent = csvContent.replace(/[\u0300-\u036f]/g, "")
-  let blob = new Blob([csvContent], {type: 'text/csv'});
+  let blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8'});
 
   if(window.navigator.msSaveOrOpenBlob) {
     window.navigator.msSaveBlob(blob, filename);
@@ -74,9 +85,6 @@ function download(filename, listName, event) {
     let elem = window.document.createElement('a');
 
     elem.href = window.URL.createObjectURL(blob);
-
-    // element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-
     elem.download = filename;
 
     document.body.appendChild(elem);
