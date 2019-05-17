@@ -136,7 +136,9 @@ a.title:hover{
     border-top: 1px solid white;
 }
 
-
+.ingredientsBorder {
+    padding: 20px;
+}
 
 
 

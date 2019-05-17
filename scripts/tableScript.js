@@ -1,5 +1,5 @@
 function setDataAsTable(ingredientList, listName) {
-  var html = "<div class='table-responsive'>"
+  let html = "<div class='table-responsive'>"
   html += "<table class='table table-hover' style='width:60%'>";
 
   html = setTableHeader(html);
@@ -7,7 +7,6 @@ function setDataAsTable(ingredientList, listName) {
 
   html+= "</table>";
   html+="</div>";
-  console.log(html);
   listName = "#" + listName + "Table";
 
   $(listName).html(html);
