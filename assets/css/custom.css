@@ -16,6 +16,11 @@ body {
     font-family:"Arial", sans-serif;
 }
 
+.emphasis {
+    color: blue;
+    font-weight: bold;
+}
+
 /******HEADER******/
 #titleName{
     text-shadow: 2px 2px 2px steelblue;
@@ -38,23 +43,51 @@ body {
     padding: 20px;
 }
 
-/******DEFAULT CHANGE******/
-h1 {
+/******DEFAULT CHANGE AND HOME PG******/
+
+#mainHeader {
     font-family:"Poppins", sans-serif;
     padding-top: 50px;
     font-size: 70px;
+}
+
+.downloadOptions{
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    color: rebeccapurple;
 }
 
 h3 {
     font-family: "Poppins", sans-serif;
     color: midnightblue;
 }
+/******HOWTO******/
 
-h4 {
+#howToMainHeader {
     font-family: "Poppins", sans-serif;
+    color: midnightblue;
     font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.howToSectionHeader{
+    font-family: "Poppins", sans-serif;
     color: rebeccapurple;
 }
+
+.howToSubHeader{
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    color: midnightblue;
+}
+
+.howToText {
+    margin-left: 3em;
+}
+
+/******DEFAULT******/
+
 a {
     color: purple;
 }
@@ -141,6 +174,13 @@ a.title:hover{
     border-top: 1px solid white;
 }
 
+
+/******HOWTO******/
+#textDiv{
+    display:flex;
+    align-items: center;
+    justify-content: left;
+}
 
 
 
