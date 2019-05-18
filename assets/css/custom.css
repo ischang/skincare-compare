@@ -32,6 +32,12 @@ body {
     padding: 30px;
 }
 
+/******BORDER******/
+
+.ingredientsBorder {
+    padding: 20px;
+}
+
 /******DEFAULT CHANGE******/
 h1 {
     font-family:"Poppins", sans-serif;
@@ -112,7 +118,6 @@ a.title:hover{
 
 
 /******TABLE******/
-
 .table {
     width: 60%;
 }
@@ -136,9 +141,6 @@ a.title:hover{
     border-top: 1px solid white;
 }
 
-.ingredientsBorder {
-    padding: 20px;
-}
 
 
 
