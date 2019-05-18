@@ -64,9 +64,9 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 - [ ] make quick 2 compare page (for two columns, either cosdna or ingredient list delimited by commas) with two columns 
 
 # to test and do for readiness:
-- [ ] water (need to fully sanitize)
-- [ ] sanitize inputs for special characters (v strange)
-- [ ] add exception for "1,2..." 
+- [x] water (need to fully sanitize)
+- [x] sanitize inputs for special characters (v strange)
+- [x] add exception for "1,2..." 
 - [ ] testing bigger spreadsheets with more columns and various edge cases for the merge
 - [ ] download as .txt/.csv dropdown/button/radio set maybe for better ux?
 - [ ] error alert cleanups in console and the like 
