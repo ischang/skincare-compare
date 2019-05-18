@@ -42,82 +42,88 @@
             </div>
             <div class="ingredientsBorder"></div>
             <div class="tableDiv">
-                <h3>Safe Ingredients</h3>
-                <div id="safeListTable">
-                    <table class="table" style="width:60%">
-                        <thead>
-                            <tr>
-                                 <th scope="col">Ingredient</th>
-                                 <th scope="col">#</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div class="downloadInputWrapper">
-                    <h4>Download Options</h4>
-                    <div class="formRadios" id="safeRadios">
-                        <div class="radio">
-                            <label><input id="safeRadio" type="radio" name="safeRadio" checked>safe ingredients list</label>
-                        </div>
-                        <div class="radio">
-                            <label><input id="safeExclusiveRadio" type="radio" name="safeRadio">safe ingredients list, without allergic ingredients</label>
-                        </div>
+                <div class="listDiv" id="safeTableDiv">
+                    <h3>Safe Ingredients</h3>
+                    <div id="safeListTable">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                     <th scope="col">Ingredient</th>
+                                     <th scope="col">#</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
-                    <form class="formClass" onsubmit="download(this['name'].value, 'safeList', event)">
-                        <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename"></div>
-                        <input type="submit" class="btn btn-custom" value="Download">
-                    </form>
+                    <div class="downloadInputWrapper">
+                        <h4>Download Options</h4>
+                        <div class="formRadios" id="safeRadios">
+                            <div class="radio">
+                                <label><input id="safeRadio" type="radio" name="safeRadio" checked>safe ingredients list</label>
+                            </div>
+                            <div class="radio">
+                                <label><input id="safeExclusiveRadio" type="radio" name="safeRadio">safe ingredients list, without allergic ingredients</label>
+                            </div>
+                        </div>
+                        <form class="formClass" onsubmit="download(this['name'].value, 'safeList', event)">
+                            <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="text.csv"></div>
+                            <input type="submit" class="btn btn-custom" value="Download">
+                        </form>
+                    </div>
                 </div>
                 <div class="ingredientsBorder"></div>
-                <h3>Allergic Ingredients</h3>
-                <div id="allergicListTable">
-                   <table class="table">
-                       <thead>
+                <div class="listDiv" id="allergicTableDiv">
+                    <h3>Allergic Ingredients</h3>
+                    <div id="allergicListTable">
+                       <table class="table">
+                           <thead>
+                                <tr>
+                                    <th>Ingredient</th>
+                                    <th>#</th>
+                                </tr>
+                           </thead>
+                       </table>
+                    </div>
+                    <div class="downloadInputWrapper">
+                        <h4>Download Options</h4>
+                        <div class="formRadios" id="allergicRadios">
+                            <div class="radio">
+                                <label><input id="allergicRadio" type="radio" name="allergicRadio" checked>allergic ingredients list</label>
+                            </div>
+                            <div class="radio">
+                                <label><input id="allergicExclusiveRadio" type="radio" name="allergicRadio">allergic ingredients list, without safe ingredients</label>
+                            </div>
+                        </div>
+                        <form class="formClass" onsubmit="download(this['name'].value, 'safeList', event)">
+                            <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="text.csv"></div>
+                            <input type="submit" class="btn btn-custom" value="Download">
+                        </form>
+                    </div>
+                </div>
+                <div class="ingredientsBorder"></div>
+                <div class="listDiv" id="sharedTableDiv">
+                    <h3>Shared Ingredients</h3>
+                    <div id="sharedListTable">
+                        <table class="table">
+                            <thead>
                             <tr>
                                 <th>Ingredient</th>
                                 <th>#</th>
                             </tr>
-                       </thead>
-                   </table>
-                </div>
-                <div class="downloadInputWrapper">
-                    <h4>Download Options</h4>
-                    <div class="formRadios" id="allergicRadios">
-                        <div class="radio">
-                            <label><input id="allergicRadio" type="radio" name="allergicRadio" checked>allergic ingredients list</label>
-                        </div>
-                        <div class="radio">
-                            <label><input id="allergicExclusiveRadio" type="radio" name="allergicRadio">allergic ingredients list, without safe ingredients</label>
-                        </div>
+                            </thead>
+                        </table>
                     </div>
-                    <form class="formClass" onsubmit="download(this['name'].value, 'safeList', event)">
-                        <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename"></div>
-                        <input type="submit" class="btn btn-custom" value="Download">
-                    </form>
-                </div>
-                <div class="ingredientsBorder"></div>
-                <h3>Shared Ingredients</h3>
-                <div id="sharedListTable">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Ingredient</th>
-                            <th>#</th>
-                        </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div class="downloadInputWrapper">
-                    <h4>Download Options</h4>
-                    <div class="formRadios" id="sharedRadios">
-                        <div class="radio">
-                            <label><input id="sharedRadio" type="radio" name="sharedRadio" checked>shared ingredients list</label>
+                    <div class="downloadInputWrapper">
+                        <h4>Download Options</h4>
+                        <div class="formRadios" id="sharedRadios">
+                            <div class="radio">
+                                <label><input id="sharedRadio" type="radio" name="sharedRadio" checked>shared ingredients list</label>
+                            </div>
                         </div>
+                        <form class="formClass" onsubmit="download(this['name'].value, 'sharedList', event)">
+                            <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="text.csv"></div>
+                            <input type="submit" class="btn btn-custom" value="Download">
+                        </form>
                     </div>
-                    <form class="formClass" onsubmit="download(this['name'].value, 'sharedList', event)">
-                        <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename"></div>
-                        <input type="submit" class="btn btn-custom" value="Download">
-                    </form>
                 </div>
             </div>
         </div>
