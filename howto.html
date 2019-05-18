@@ -1,0 +1,81 @@
+<html>
+<head>
+    <title>Skincare Compare</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href = "assets/css/custom.css">
+
+    <!--JQUERY-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+</head>
+<body style="font-family: 'Raleway', sans-serif">
+    <div class="container">
+        <h1 id="mainHeader"><div id="titleName"><a class="title" href="./index.html">Skincare Compare</a></div></h1>
+        <h3>
+            <div class = "aboutLinks">
+                <a class = "link" href="./index.html">home</a>
+                <text style="color: midnightblue; font-weight: bold;"> | </text>
+                <a class = "link" href="./howto.html">how to</a>
+                <text style="color: midnightblue; font-weight: bold;"> | </text>
+                <a class = "link" href="./quickcompare.html">quick compare</a>
+                <text style="color: midnightblue; font-weight: bold;"> | </text>
+                <a class = "link" href="./resources.html">resources</a>
+                <text style="color: midnightblue; font-weight: bold;"> | </text>
+                <a class = "link" href="./about.html">about</a>
+            </div>
+        </h3>
+    </div>
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <h1 id="howToMainHeader">How to Use This Skin Compare Tool</h1>
+        <h2 class="howToSectionHeader">To start:</h2>
+            <div class="howToText">
+                This tool assumes you already have a .csv file in the expected format. If you don't know what a .csv file is, click <a href="https://www.computerhope.com/issues/ch001356.htm">here</a> for an explanation.
+                <h4 class="howToSubHeader">You can get a .csv file by:</h4>
+                <ul>
+                    <li>exporting from <a href="https://docs.google.com/spreadsheets/u/0/">Google Sheets/Google Drive</a></li>
+                    <li>exporting from <a href="https://products.office.com/en-us/excel">Microsoft Excel</a></li>
+                    <li>exporting from <a href="https://en.wikipedia.org/wiki/List_of_spreadsheet_software">another spreadsheet program</a></li>
+                    <li>creating your own .csv file from a simple text editor (like Notepad, Sublime, or TextEdit)</li>
+                </ul>
+                <h4 class="howToSubHeader">You will need at least 2 columns:</h4>
+                <ul>
+                    <li>Ingredients</li>
+                    <li>Result</li>
+                </ul>
+                You can add other columns, but the tool will ignore them.
+            </div>
+        <h2 class="howToSectionHeader">Ingredients Column</h2>
+            <div class="howToText">
+                The Ingredients column expects ingredients separated by commas with a space before it, e.g.: <br><br>
+
+                <div style="margin-left:4em;"><i>Water, Glycerin, Butylene Glycol, Rice Ferment Filtrate (Sake), Glutamic Acid, Arginine, Leucine, Ceramide 3, Ceramide 6, Placental Protein, Arbutin,Dipotassium Glycyrrhizate (Licorice Root Extract), Glycine Soja (Soybean) Protein, Maltitol, Methyl Gluceth-10, Peg-6 Hydrogenated Castor Oil, Hydroxyethylcellulose, Sodium Styrene/Acrylates Copolymer, Citric Acid, Sodium Citrate, Phenoxyethanol, Methylparaben, Fragrance</i></div>
+                <br>
+                <h4 class="howToSubHeader">Notes:</h4>
+                <ul>
+                    <li><span class="emphasis">will NOT work</span> if ingredients are separated by:
+                        <ul>
+                            <li>white spaces (e.g. <i>Water Glycerin Butylene Glycol Rice Ferment Filtrate (Sake), etc)</i></li>
+                            <li>commas with no spaces in between (e.g. <i>Water,Glycerin,Butylene Glycol,Rice Ferment Filtrate (Sake), etc)</i></li>
+                        </ul>
+                    </li>
+                    <li>the following synonyms of water will be replaced with "water" in the spreadsheet: <span class="emphasis">aqua, eau, h20, and purified water</span></li>
+                    <li>the tool is <span class="emphasis">NOT case sensitive</span>, so if your ingredients are in caps or differently cased, the tool will make them all lowercase</li>
+                    <li>if there is an ingredient that has a comma in them, such as "1,2-hexanediol", the tool will count it as a single ingredient, but it won't show up properly in the CSV</li>
+                </ul>
+
+                <span class="emphasis">This tool isn't perfect.</span> It's just meant to make ingredient comparing a lot easier. You should still look over the returned .csv yourself and make any corrections.
+            </div>
+        <h3>Results</h3>
+        The Results column expects values for safe products as: "safe", "good", "yes"; for allergic/bad products: "allergic", "bad", "no"; and for untested products "TBD".
+        <h3>Tables</h3>
+        The tables, by default, will only show the top 10 results from each category. If you want to see the whole list, you will need to download the spreadsheet.
+        <h3>Sheets</h3>
+    </div>
+    <div class="col-sm=2"></div>
+</body>
+</html>
