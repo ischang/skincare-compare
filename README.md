@@ -58,7 +58,7 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 - [x] 2) 2 sheets: all the good ingredients without the bad ingredients, all the bad ingredients - good one 
 - [x] 3) ignores result column and just finds all common ingredients into one download
 - [ ] downloadable example csv
-- [ ] cosdna scraping support 
+- [ ] cosdna scraping support https://stackoverflow.com/questions/15005500/loading-cross-domain-endpoint-with-jquery-ajax
 - [ ] test various cases (see below)
 - [ ] make how to use this guide (how to do comma deliminiation, result can say: good, bad, allergic, explain that water/aqua -> is just water, google spreadsheet -> CSV, example basic CSV, resources, and about page
 - [ ] make quick 2 compare page (for two columns, either cosdna or ingredient list delimited by commas) with two columns 
