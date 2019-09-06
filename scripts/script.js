@@ -18,17 +18,19 @@ function uploadCsvFile(event) {
       data = $.csv.toObjects(csvData.target.result);
 
       if (data && data.length > 0) {
-        lists = handleData(data);
+        handleData(data).then(function(dataLists) {
+          lists = dataLists;
+          setDataAsTable(dataLists.sharedList, "sharedList");
 
-        setDataAsTable(lists.safeList, "safeList");
-        setDataAsTable(lists.allergicList, "allergicList");
-        setDataAsTable(lists.sharedList, "sharedList");
+          if(errors.length > 0) {
+            console.log("There are errors");
+          } else {
+            console.log('Imported -' + data.length + '- rows successfully!');
+          }
+        });
 
-        if(errors.length > 0) {
-          console.log("There are errors");
-        } else {
-          console.log('Imported -' + data.length + '- rows successfully!');
-        }
+        // setDataAsTable(lists.safeList, "safeList");
+        // setDataAsTable(lists.allergicList, "allergicList");
       } else {
         errors.push("No data to import!");
         console.log('No data to import!');
@@ -63,6 +65,7 @@ function isDefaultList(listname) {
     return document.getElementById("allergicRadio").checked;
   }
 }
+
 function download(filename, listName, event) {
   event.preventDefault();
 
@@ -98,6 +101,7 @@ function createCsvContent(list) {
 
   lineArray.push("Ingredient,#");
 
+  console.log(list);
   list.forEach(function (infoArray) {
     lineArray.push(infoArray.join(","));
   });
