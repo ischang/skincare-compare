@@ -11,19 +11,37 @@ handleData:
 */
 function handleData(csvDataArray) {
   let dataLists = {};
-  let safeAllergicLists = createSafeAllergicLists(csvDataArray);
+  // let safeAllergicLists = createSafeAllergicLists(csvDataArray);
+  // return createSharedList(csvDataArray).then(function (data){
+  //   console.log(data);
+  //   dataLists["sharedList"] = data;
+  //   return Promise.resolve(dataLists);
+  // }).catch(function (error){
+  //   console.log(error);
+  // });
 
-  dataLists["sharedList"] = createSharedList(csvDataArray);
-  dataLists["allergicList"] = safeAllergicLists.allergicList;
-  dataLists["safeList"] = safeAllergicLists.safeList;
+  return createSharedList(csvDataArray).then(function (data) {
+    console.log(data);
+    dataLists["sharedList"] = data;
+    console.log(dataLists["sharedList"]);
 
-  if (dataLists.allergicList && dataLists.safeList) {
-    let exclusiveLists = createExclusiveSafeAllergicLists(dataLists);
-    dataLists["safeListExclusive"] =  exclusiveLists.safeListExclusive;
-    dataLists["allergicListExclusive"] = exclusiveLists.allergicListExclusive;
-  }
+    return new Promise(function (resolve) {
+      resolve(dataLists);
+    });
+  });
 
-  return dataLists;
+  // dataLists["sharedList"] = createSharedList(csvDataArray);
+  // dataLists["allergicList"] = safeAllergicLists.allergicList;
+  // dataLists["safeList"] = safeAllergicLists.safeList;
+  //
+  //
+  // if (dataLists.allergicList && dataLists.safeList) {
+  //   let exclusiveLists = createExclusiveSafeAllergicLists(dataLists);
+  //   dataLists["safeListExclusive"] =  exclusiveLists.safeListExclusive;
+  //   dataLists["allergicListExclusive"] = exclusiveLists.allergicListExclusive;
+  // }
+
+
 }
 
 /*
@@ -55,11 +73,13 @@ getIngredients:
     - If not, return ingredients as is
 */
 function getIngredients (ingredientsColumn) {
-
   if (isCosdna(ingredientsColumn)) {
     return getDomFromCosdna(ingredientsColumn);
   } else {
-    return $.Deferred().resolve(ingredientsColumn);
+    return new Promise(function(resolve) {
+      console.log(ingredientsColumn);
+      resolve(ingredientsColumn);
+    });
   }
   //this should be called before iterateThroughDictionary and is what is passed into iterateThroughDictionary
 }
@@ -107,36 +127,69 @@ createSharedList:
 */
 function createSharedList (csvDataArray) {
   let sharedList = new Object();
+  let promises = [];
+  //
+  // return new Promise(function (resolve, reject) {
+  //   try {
+  //     csvDataArray.forEach(function (csvObject) {
+  //       getIngredients(csvObject["Ingredients"]).then(function (data) {
+  //         sharedList = iterateThroughDictionary(parseIngredients(data), sharedList);
+  //       });
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //     console.log("world");
+  //     reject("problem in createSharedList")
+  //   }
+  // });
 
   //includes TBD, good, && bad
-  try {
-    csvDataArray.forEach(function (csvObject) {
-      getIngredients(csvObject["Ingredients"]).done(function (data) {
-        sharedList = iterateThroughDictionary(data, sharedList);
+  // try{
+  csvDataArray.forEach(function (csvObject) {
+    // console.log(getIngredients(csvObject["Ingredients"]).then(function (data) {
+    //   sharedList = iterateThroughDictionary(parseIngredients(data), sharedList);
+    // }));
+    promises.push(
+      getIngredients(csvObject["Ingredients"]).then(function (data) {
+        sharedList = iterateThroughDictionary(parseIngredients(data), sharedList);
+      }).catch(function(error){
+        console.log(error);
       })
-    })
-  } catch (error) {
-    console.log(error);
-    errors.push("You might have a) misspelled your column");
-  }
+    )
+  });
 
-  return sharedList;
+  return Promise.all(promises).then( () => {
+    return sharedList;
+  }).catch(function(error){
+    console.log(error);
+  });
+
+  return Promise.resolve(sharedList);
+  // csvDataArray.forEach(function (csvObject) {
+  //   getIngredients(csvObject["Ingredients"]).then(function (data) {
+  //     sharedList = iterateThroughDictionary(parseIngredients(data), sharedList);
+  //   });
+  // })
+  // } catch (error) {
+  //   console.log(error);
+  //   errors.push("You might have a) misspelled your column");
+  // }
 }
 
-/*
-createSafeAllergicLists:
-
-  Purpose: to create safe and allergic lists from the .csv object
-
-  - Given a csvDataArray grabbed from a .csv
-      - Creates two empty objects instantiated as safeList and allergicList
-      - Iterates through each row and lowercases the "result" key for comparison
-      - If result is not "tbd", and is "safe", then pass ingredients iterateThroughDictionary
-        and put all the ingredients into a safeList
-      - If result is not "tbd", and is "bad" or "allergic", the pass ingredients
-        iterateThroughDictionary and put all ingredients into an allergicList
-*/
 function createSafeAllergicLists(csvDataArray) {
+  /*
+  createSafeAllergicLists:
+
+    Purpose: to create safe and allergic lists from the .csv object
+
+    - Given a csvDataArray grabbed from a .csv
+        - Creates two empty objects instantiated as safeList and allergicList
+        - Iterates through each row and lowercases the "result" key for comparison
+        - If result is not "tbd", and is "safe", then pass ingredients iterateThroughDictionary
+          and put all the ingredients into a safeList
+        - If result is not "tbd", and is "bad" or "allergic", the pass ingredients
+          iterateThroughDictionary and put all ingredients into an allergicList
+  */
   let safeList = new Object();
   let allergicList = new Object();
 
@@ -178,14 +231,7 @@ iterateThroughDictionary:
 */
 function iterateThroughDictionary(ingredients, dict) {
   try {
-
-    //regex for splitting by just comma, while ignoring parens: /,(?![^(]*\))/
-    //splits by a "space and comma" e.g. "foo, bar, xyz" vs "foo,bar,xyz", while ignoring parens
-    let regex = /,(?![^(]*\)) /;
-
-    //remove zero width space
-    ingredients = ingredients.replace(/[\u200B-\u200D\uFEFF]/g, '');
-    let ingredientsArray = ingredients.split(regex).filter(Boolean);
+    let ingredientsArray = sanitizingIngredientsInput(ingredients);
 
     ingredientsArray.forEach(function (listIngredient) {
       let ingredient = listIngredient.toLowerCase().trim();
@@ -205,4 +251,21 @@ function iterateThroughDictionary(ingredients, dict) {
   }
 
   return dict;
+}
+
+function sanitizingIngredientsInput (ingredients) {
+  //regex for splitting by just comma, while ignoring parens: /,(?![^(]*\))/
+  //splits by a "space and comma" e.g. "foo, bar, xyz" vs "foo,bar,xyz", while ignoring parens
+  let regex = /,(?![^(]*\)) /;
+  let ingredientsArray = []
+
+  if (Array.isArray(ingredients)) {
+    ingredientsArray = ingredients;
+  } else {
+    //remove zero width space
+    ingredients = ingredients.replace(/[\u200B-\u200D\uFEFF]/g, '');
+    ingredientsArray = ingredients.split(regex).filter(Boolean);
+  }
+
+  return ingredientsArray;
 }
