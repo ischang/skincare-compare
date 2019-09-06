@@ -10,38 +10,30 @@ handleData:
     - Check that both the allergicList and safeList exists before creating exclusive lists
 */
 function handleData(csvDataArray) {
-  let dataLists = {};
-  // let safeAllergicLists = createSafeAllergicLists(csvDataArray);
-  // return createSharedList(csvDataArray).then(function (data){
-  //   console.log(data);
-  //   dataLists["sharedList"] = data;
-  //   return Promise.resolve(dataLists);
-  // }).catch(function (error){
-  //   console.log(error);
-  // });
+  let promises = [];
 
-  return createSharedList(csvDataArray).then(function (data) {
-    console.log(data);
-    dataLists["sharedList"] = data;
-    console.log(dataLists["sharedList"]);
-
+  let sharedListPromise = createSharedList(csvDataArray).then(function (sharedList) {
     return new Promise(function (resolve) {
-      resolve(dataLists);
+      resolve({"sharedList": sharedList});
     });
+  })
+
+  let safeAllergicListsPromise = createSafeAllergicLists(csvDataArray).then(function (safeAllergicLists) {
+    let exclusiveLists = {};
+
+    if (safeAllergicLists.allergicList && safeAllergicLists.safeList) {
+       exclusiveLists = createExclusiveSafeAllergicLists(safeAllergicLists);
+    }
+
+    return new Promise( function (resolve) {
+      resolve({safeAllergicLists, exclusiveLists});
+    })
   });
 
-  // dataLists["sharedList"] = createSharedList(csvDataArray);
-  // dataLists["allergicList"] = safeAllergicLists.allergicList;
-  // dataLists["safeList"] = safeAllergicLists.safeList;
-  //
-  //
-  // if (dataLists.allergicList && dataLists.safeList) {
-  //   let exclusiveLists = createExclusiveSafeAllergicLists(dataLists);
-  //   dataLists["safeListExclusive"] =  exclusiveLists.safeListExclusive;
-  //   dataLists["allergicListExclusive"] = exclusiveLists.allergicListExclusive;
-  // }
+  promises.push(sharedListPromise)
+  promises.push(safeAllergicListsPromise);
 
-
+  return promises;
 }
 
 /*
@@ -57,9 +49,34 @@ quickCompare:
       createExclusiveSafeAllergicLists (possibly refactor)
     - Return both lists
 */
-function quickCompare () {
-  // here are the ingredients these two columns share:
-  // here are the ingredients these two columns do not share
+function quickCompare (columnA, columnB) {
+  return getIngredients(columnA).then(function(dataA){
+    dataA = parseIngredients(dataA)
+    return getIngredients(columnB).then(function(dataB){
+      dataB = parseIngredients(dataB);
+      let quickCompareList = dataA.filter(object => dataB.includes(object));
+
+      let exclusiveListA = dataA.filter(function (object) {
+        return dataB.indexOf(object) == -1;
+      });
+
+      let exclusiveListB = dataB.filter(function (object) {
+        return dataA.indexOf(object) == -1;
+      });
+
+      return new Promise(function (resolve){
+        resolve({quickCompareList, exclusiveListA, exclusiveListB})
+      })
+    }).catch(function(error){
+      console.log(error);
+    })
+  });
+}
+
+function callQuickCompareTest () {
+  quickCompare("http://www.cosdna.com/eng/cosmetic_df52126587.html", "http://www.cosdna.com/eng/cosmetic_b890343471.html").then(function (data) {
+    console.log(data);
+  })
 }
 
 /*
@@ -81,7 +98,14 @@ function getIngredients (ingredientsColumn) {
       resolve(ingredientsColumn);
     });
   }
-  //this should be called before iterateThroughDictionary and is what is passed into iterateThroughDictionary
+}
+
+function getIngredientsPromise (csvObject, dict) {
+  return getIngredients(csvObject["Ingredients"]).then(function (data) {
+    dict = iterateThroughDictionary(parseIngredients(data), dict);
+  }).catch(function(error){
+    console.log(error);
+  })
 }
 
 /*
@@ -128,34 +152,13 @@ createSharedList:
 function createSharedList (csvDataArray) {
   let sharedList = new Object();
   let promises = [];
-  //
-  // return new Promise(function (resolve, reject) {
-  //   try {
-  //     csvDataArray.forEach(function (csvObject) {
-  //       getIngredients(csvObject["Ingredients"]).then(function (data) {
-  //         sharedList = iterateThroughDictionary(parseIngredients(data), sharedList);
-  //       });
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //     console.log("world");
-  //     reject("problem in createSharedList")
-  //   }
-  // });
 
   //includes TBD, good, && bad
   // try{
   csvDataArray.forEach(function (csvObject) {
-    // console.log(getIngredients(csvObject["Ingredients"]).then(function (data) {
-    //   sharedList = iterateThroughDictionary(parseIngredients(data), sharedList);
-    // }));
     promises.push(
-      getIngredients(csvObject["Ingredients"]).then(function (data) {
-        sharedList = iterateThroughDictionary(parseIngredients(data), sharedList);
-      }).catch(function(error){
-        console.log(error);
-      })
-    )
+      getIngredientsPromise(csvObject, sharedList)
+    );
   });
 
   return Promise.all(promises).then( () => {
@@ -165,58 +168,53 @@ function createSharedList (csvDataArray) {
   });
 
   return Promise.resolve(sharedList);
-  // csvDataArray.forEach(function (csvObject) {
-  //   getIngredients(csvObject["Ingredients"]).then(function (data) {
-  //     sharedList = iterateThroughDictionary(parseIngredients(data), sharedList);
-  //   });
-  // })
-  // } catch (error) {
-  //   console.log(error);
-  //   errors.push("You might have a) misspelled your column");
-  // }
 }
 
+
+/*
+createSafeAllergicLists:
+
+  Purpose: to create safe and allergic lists from the .csv object
+
+  - Given a csvDataArray grabbed from a .csv
+      - Creates two empty objects instantiated as safeList and allergicList
+      - Iterates through each row and lowercases the "result" key for comparison
+      - If result is not "tbd", and is "safe", then pass ingredients iterateThroughDictionary
+        and put all the ingredients into a safeList
+      - If result is not "tbd", and is "bad" or "allergic", the pass ingredients
+        iterateThroughDictionary and put all ingredients into an allergicList
+*/
 function createSafeAllergicLists(csvDataArray) {
-  /*
-  createSafeAllergicLists:
-
-    Purpose: to create safe and allergic lists from the .csv object
-
-    - Given a csvDataArray grabbed from a .csv
-        - Creates two empty objects instantiated as safeList and allergicList
-        - Iterates through each row and lowercases the "result" key for comparison
-        - If result is not "tbd", and is "safe", then pass ingredients iterateThroughDictionary
-          and put all the ingredients into a safeList
-        - If result is not "tbd", and is "bad" or "allergic", the pass ingredients
-          iterateThroughDictionary and put all ingredients into an allergicList
-  */
   let safeList = new Object();
   let allergicList = new Object();
+  let promises = [];
 
-  try {
-    csvDataArray.forEach(function (csvObject) {
-      let result = csvObject["Result"].toString().toLowerCase();
+  csvDataArray.forEach(function (csvObject) {
+    let result = csvObject["Result"].toString().toLowerCase();
 
-      if (result !== "tbd") {
-        if (goodWords.includes(result)) {
-          safeList = iterateThroughDictionary(csvObject["Ingredients"], safeList);
-        } else if (badWords.includes(result)) {
-          allergicList = iterateThroughDictionary(csvObject["Ingredients"], allergicList);
-        } else {
-          throw new Error();
-        }
+    if (result !== "tbd") {
+      if (goodWords.includes(result)) {
+        promises.push(
+          getIngredientsPromise(csvObject, safeList)
+        );
+      } else if (badWords.includes(result)) {
+        promises.push(
+          getIngredientsPromise(csvObject, allergicList)
+        );
+      } else {
+        throw new Error();
       }
-    });
+    }
+  });
 
-  } catch (error) {
+  return Promise.all(promises).then( () => {
+    return {
+      safeList: safeList,
+      allergicList: allergicList
+    };
+  }).catch(function(error){
     console.log(error);
-    errors.push("You a) might not have a \'Result\' column, b) misspelled your column, or c) one of your results is empty: please fill in \'safe\', \'good'\, \'yes\', \'no'\, \'bad\', \'allergic\', or \'tbd\'");
-  }
-
-  return {
-    safeList: safeList,
-    allergicList: allergicList
-  };
+  });
 }
 
 /*
