@@ -18,19 +18,39 @@ function uploadCsvFile(event) {
       data = $.csv.toObjects(csvData.target.result);
 
       if (data && data.length > 0) {
-        handleData(data).then(function(dataLists) {
-          lists = dataLists;
-          setDataAsTable(dataLists.sharedList, "sharedList");
+        let promises = handleData(data);
+
+        Promise.all(promises).then(function(result){
+          lists["sharedList"] = result[0].sharedList;
+          lists["allergicList"] = result[1].safeAllergicLists.allergicList;
+          lists["safeList"] = result[1].safeAllergicLists.safeList;
+          lists["allergicListExclusive"] = result[1].exclusiveLists.allergicListExclusive;
+          lists["safeListExclusive"] = result[1].exclusiveLists.safeListExclusive;
+
+          setDataAsTable(lists.sharedList, "sharedList");
+          setDataAsTable(lists.safeList, "safeList");
+          setDataAsTable(lists.allergicList, "allergicList");
 
           if(errors.length > 0) {
             console.log("There are errors");
           } else {
             console.log('Imported -' + data.length + '- rows successfully!');
           }
-        });
 
-        // setDataAsTable(lists.safeList, "safeList");
-        // setDataAsTable(lists.allergicList, "allergicList");
+        });
+        // handleData(data).then(function(dataLists) {
+        //   lists = dataLists;
+        //   console.log(dataLists);
+        //   setDataAsTable(dataLists.sharedList, "sharedList");
+        //   setDataAsTable(dataLists.safeList, "safeList");
+        //   setDataAsTable(dataLists.allergicList, "allergicList");
+        //
+        //   if(errors.length > 0) {
+        //     console.log("There are errors");
+        //   } else {
+        //     console.log('Imported -' + data.length + '- rows successfully!');
+        //   }
+        // });
       } else {
         errors.push("No data to import!");
         console.log('No data to import!');
