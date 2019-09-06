@@ -13,7 +13,7 @@
 // }
 
 function isCosdna(url) {
-  return getHostFromUrl(url) != ('cosdna.com');
+  return getHostFromUrl(url) == ('cosdna.com');
 }
 
 /*
@@ -41,10 +41,16 @@ getHostFromUrl:
 function getHostFromUrl (url) {
   let link = document.createElement("a");
   link.href = addHttp(url);
-  return link.hostname.startsWith("wwww") ? link.hostname.substring(4) : link.hostname;
+
+  if (link.hostname.startsWith("www")) {
+    return link.hostname.substring(4);
+  }
+
+  return link.hostname;
 }
 
-function getDomFromCosdna (url, callback) {
+
+function getDomFromCosdna (url) {
   $.ajaxPrefilter( function (options) {
     if (options.crossDomain && jQuery.support.cors) {
       var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
@@ -53,9 +59,19 @@ function getDomFromCosdna (url, callback) {
     }
   });
 
-  return $.get({
-    url
+  return new Promise(function (resolve, reject) {
+    $.get({
+      url,
+      success: function (data) {
+        resolve(data);
+      },
+      error: function (error) {
+        reject(error)
+      }
+    })
   });
+
+  //I can make this work with synchronous but then I'd hate myself
 }
 
 function parseIngredients (data) {
