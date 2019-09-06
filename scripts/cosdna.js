@@ -70,8 +70,6 @@ function getDomFromCosdna (url) {
       }
     })
   });
-
-  //I can make this work with synchronous but then I'd hate myself
 }
 
 function parseIngredients (data) {
