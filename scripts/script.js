@@ -78,7 +78,7 @@ function download(filename, listName, quickCompare, event) {
   event.preventDefault();
 
   if (Object.keys(lists).length == 0) {
-    window.alert("You need to upload a CSV first!");
+    window.alert("You didn't input anything as a CSV file or input any text yet!");
   }
 
   if (!isNotExclusiveListNames.includes(listName) && !isDefaultList(listName)) {
