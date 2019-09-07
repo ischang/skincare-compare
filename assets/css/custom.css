@@ -4,13 +4,13 @@ body {
     align-items: center;
     /*justify-content: center;*/
 
-    background-image: url(../img/bg1.jpg);
+    /*background-image: url(../img/bg1.jpg);*/
 
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    background-color: white;
+    background-color: ghostwhite;
     height: 100%;
 
     font-family:"Arial", sans-serif;
@@ -23,9 +23,10 @@ body {
 
 /******HEADER******/
 #titleName{
-    text-shadow: 2px 2px 2px steelblue;
-    color: midnightblue;
+    text-shadow: 2px 2px 2px midnightblue;
+    color: darkslateblue;
     text-align: center;
+    font-family: Raleway Dots;
 }
 
 .aboutLinks {
@@ -48,7 +49,7 @@ body {
 #mainHeader {
     font-family:"Poppins", sans-serif;
     padding-top: 50px;
-    font-size: 70px;
+    font-size: 100px;
 }
 
 .downloadOptions{
@@ -126,7 +127,7 @@ a.title:hover{
 
 /* adding to default? */
 .radio {
-    font-family: "Poppins", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .filenameInputWrapper {
@@ -149,7 +150,17 @@ a.title:hover{
 /*display: block; !* 1. oh noes, my inputs are styled as block... *!*/
 /*}*/
 
+/******QUICK COMPARE******/
+.quickCompareLabel {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    color: midnightblue;
+}
 
+h2 {
+    font-family: "Poppins", sans-serif;
+    color: midnightblue;
+}
 /******TABLE******/
 .table {
     width: 60%;

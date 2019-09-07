@@ -1,6 +1,5 @@
 /*
 handleData:
-
   Purpose: top level function -- creates the various lists
 
   - Given a csvDataArray grabbed from a .csv
@@ -37,72 +36,38 @@ function handleData(csvDataArray) {
 }
 
 /*
-quickCompare:
-
-  Purpose: for the Quick Compare tool. Given two columns, whether comma delimited ingredients or a CosDna webpage,
-  compare and give both the shared ingredients and the not-shared ingredients
-
-  - Given two ingredients columns (strings)
-    - Call getIngredients on both strings
-    - Merge both and pass that into createSharedList and set that as one list
-    - Create a new list called nonSharedList and run the same logic as
-      createExclusiveSafeAllergicLists (possibly refactor)
-    - Return both lists
-*/
-function quickCompare (columnA, columnB) {
-  return getIngredients(columnA).then(function(dataA){
-    dataA = parseIngredients(dataA)
-    return getIngredients(columnB).then(function(dataB){
-      dataB = parseIngredients(dataB);
-      let quickCompareList = dataA.filter(object => dataB.includes(object));
-
-      let exclusiveListA = dataA.filter(function (object) {
-        return dataB.indexOf(object) == -1;
-      });
-
-      let exclusiveListB = dataB.filter(function (object) {
-        return dataA.indexOf(object) == -1;
-      });
-
-      return new Promise(function (resolve){
-        resolve({quickCompareList, exclusiveListA, exclusiveListB})
-      })
-    }).catch(function(error){
-      console.log(error);
-    })
-  });
-}
-
-function callQuickCompareTest () {
-  quickCompare("http://www.cosdna.com/eng/cosmetic_df52126587.html", "http://www.cosdna.com/eng/cosmetic_b890343471.html").then(function (data) {
-    console.log(data);
-  })
-}
-
-/*
-getIngredients:
+getRawData:
   Purpose: check if there's a website in the ingredients column instead of actual comma
   delimited ingredients and calls the appropriate web scraping functions
 
   - Given an ingredientsColumn
     - Check if it's a CosDna website
-    - If yes, call fetchIngredientsFromCosdna and return ingredients
-    - If not, return ingredients as is
+    - If yes, call getDomFromCosdna and return dom as a promise from Ajax
+    - If not, return ingredients as is, wrapped in a promise
 */
-function getIngredients (ingredientsColumn) {
+function getRawData(ingredientsColumn) {
   if (isCosdna(ingredientsColumn)) {
     return getDomFromCosdna(ingredientsColumn);
   } else {
     return new Promise(function(resolve) {
-      console.log(ingredientsColumn);
       resolve(ingredientsColumn);
     });
   }
 }
 
-function getIngredientsPromise (csvObject, dict) {
-  return getIngredients(csvObject["Ingredients"]).then(function (data) {
-    dict = iterateThroughDictionary(parseIngredients(data), dict);
+/*
+getList:
+  Purpose: helper method for the list fetching methods
+
+  - Given a csvObject and a dictionary object
+    - Call getRawData and pass in the 'Ingredients' column from the csv object
+    - Call getIngredients on the data to get the actual ingredients from the rawData and return
+      the data back as a dictionary, with ingredient as key and the count of the ingredient as the value
+    - Return the dictionary as the final list
+*/
+function getList(csvObject, dict) {
+  return getRawData(csvObject["Ingredients"]).then(function (data) {
+    dict = iterateThroughDictionary(getIngredients(data), dict);
   }).catch(function(error){
     console.log(error);
   })
@@ -116,8 +81,10 @@ createExclusiveSafeAllergicLists:
   - Given an object of dataLists with allergicList and safeList
     - Make a deep copy of both lists and iterate through each list and delete what is not in the other
     - Repeat again for second list
+
+  - ??: I wasn't able to move the for loops into separate methods to call -- would break some of the lists
 */
-function createExclusiveSafeAllergicLists (dataLists) {
+function createExclusiveSafeAllergicLists(dataLists) {
   let allergicListExclusive = jQuery.extend(true, {}, dataLists.allergicList);
   let safeListExclusive = jQuery.extend(true, {}, dataLists.safeList);
 
@@ -154,10 +121,9 @@ function createSharedList (csvDataArray) {
   let promises = [];
 
   //includes TBD, good, && bad
-  // try{
   csvDataArray.forEach(function (csvObject) {
     promises.push(
-      getIngredientsPromise(csvObject, sharedList)
+      getList(csvObject, sharedList)
     );
   });
 
@@ -170,10 +136,8 @@ function createSharedList (csvDataArray) {
   return Promise.resolve(sharedList);
 }
 
-
 /*
 createSafeAllergicLists:
-
   Purpose: to create safe and allergic lists from the .csv object
 
   - Given a csvDataArray grabbed from a .csv
@@ -195,11 +159,11 @@ function createSafeAllergicLists(csvDataArray) {
     if (result !== "tbd") {
       if (goodWords.includes(result)) {
         promises.push(
-          getIngredientsPromise(csvObject, safeList)
+          getList(csvObject, safeList)
         );
       } else if (badWords.includes(result)) {
         promises.push(
-          getIngredientsPromise(csvObject, allergicList)
+          getList(csvObject, allergicList)
         );
       } else {
         throw new Error();
@@ -219,17 +183,17 @@ function createSafeAllergicLists(csvDataArray) {
 
 /*
 iterateThroughDictionary:
+  Purpose: to sanitize ingredients, lowercase them, and return the counts of each ingredient found
 
- Purpose: to sanitize ingredients, lowercase them, and return the counts of each ingredient found
-
- - Given an ingredients column and a dictionary
-    - Sanitizes the ingredients column using regex and removing zero width spaces
-    - Loops through each ingredient, lowercases them, and replaces any ingredient that might just be "water" with simply water
-    - Then puts the ingredient in a dictionary and increments the count for each time the ingredient is found
+   - Given an ingredients column and a dictionary
+      - Sanitizes the ingredients column using regex and removing zero width spaces
+      - Loops through each ingredient, lowercases them, and replaces any ingredient
+        that might just be "water" with simply water
+      - Then puts the ingredient in a dictionary and increments the count for each time the ingredient is found
 */
 function iterateThroughDictionary(ingredients, dict) {
   try {
-    let ingredientsArray = sanitizingIngredientsInput(ingredients);
+    let ingredientsArray = sanitizeIngredientsInput(ingredients);
 
     ingredientsArray.forEach(function (listIngredient) {
       let ingredient = listIngredient.toLowerCase().trim();
@@ -251,7 +215,18 @@ function iterateThroughDictionary(ingredients, dict) {
   return dict;
 }
 
-function sanitizingIngredientsInput (ingredients) {
+/*
+sanitizeIngredientsInput:
+  Purpose: helper method for iterateThroughDictionary to cleanup the sanitization of the input
+
+  - Given an ingredients object
+     - Verify if the ingredients object is an array or not -- if it's already an array,
+       this means that the data was already grabbed and parsed from Cosdna
+     - If the object is not an array, this data was from the .csv file -- replace any zero-width
+       spaces with actual spaces
+     - Regex this into an array and return
+*/
+function sanitizeIngredientsInput (ingredients) {
   //regex for splitting by just comma, while ignoring parens: /,(?![^(]*\))/
   //splits by a "space and comma" e.g. "foo, bar, xyz" vs "foo,bar,xyz", while ignoring parens
   let regex = /,(?![^(]*\)) /;

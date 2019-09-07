@@ -3,40 +3,47 @@
     <title>Skincare Compare</title>
     <!-- CSS -->
     <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway+Dots&display=swap" rel="stylesheet">
     <link rel="stylesheet" href = "assets/css/custom.css">
 
     <!--JQUERY-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
-    <!--CUSTOM-->
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
+    <!--CUSTOM SCRIPTS-->
+    <script src="scripts/header.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1 id="mainHeader"><div id="titleName"><a class="title" href="./index.html">Skincare Compare</a></div></h1>
-        <h3>
-            <div class = "aboutLinks">
-                <a class = "link" href="./index.html">home</a>
-                <text style="color: midnightblue; font-weight: bold;"> | </text>
-                <a class = "link" href="./howto.html">how to</a>
-                <text style="color: midnightblue; font-weight: bold;"> | </text>
-                <a class = "link" href="./quickcompare.html">quick compare</a>
-                <text style="color: midnightblue; font-weight: bold;"> | </text>
-                <a class = "link" href="./resources.html">resources</a>
-                <text style="color: midnightblue; font-weight: bold;"> | </text>
-                <a class = "link" href="./about.html">about</a>
-            </div>
-        </h3>
+        <div id="header"></div>
     </div>
-    <div>
-        About This Tool && Many Disclaimers
-        - This tool is hosted on Github pages, under my own personal Github repository and is all completely client side! Basically, that means nothing gets stored and I have no idea what you've typed or put in with this tool.
-        If you're interested, you can see all the code in all its spaghetti-ness here. I typically write in Java and haven't worked much with Javascript since my student days, so apologies in advance if it's unreadable.
-        About me
+    <div class="col-sm-4"></div>
+    <div class="col-sm-7">
+        <div>
+            About This Tool
+            This simple tool/wobsite (link to xkcd comic) was written in: vanilla Javascript, some Ajax/JQuery, HTML/CSS and Twitter Bootstrap magic.
+            It's hosted on Github pages, under my own personal Github repository, and all the business logic is done completely client side.
+            Basically, that means nothing you input will get stored (except by your own local machine/browser) -- there's no server on my end or anything that's going to see what you typed or uploaded.
 
+            This tool is under a Creative Commons License blbh albh albha.
+            If you're interested, you can see everything here at this Github repository. I don't typically write in Javascript, so I can't guarantee that my code is the cleanest or my practices are the best. However, I did put comments above all the methods for my own clarity, since I constantly forget what my code does after coming back to it, months later. This also means that if you're interested in seeing how the code works, you can try to follow along with the comments.
+
+            If you notice any bugs in the tool, or if something stops working, you can DM me on Reddit @ this username OR contact me below with the debug logs or stacktrace (right click, click on inspect page, and click on Console. If there's any logs, copypaste and send them to me).
+            I won't guarantee that I'll get to fixing something immediately -- after all, I still have a day job and this was created in my spare time.
+
+            This tool can also work with not just skincare products, but any product that has an ingredient list as long as you provide a CSV with the specified columns.
+
+            Why I wrote this
+
+            I wrote this in my spare time for fun.
+            The motivation behind this website is to make my life easier when trying to find skincare products that work for me. I already had a spreadsheet, but it was a pain to try and figure out what particular ingredients was on what list and what wasn't.
+            I have extremely sensitive skin -- I have atopic dermatitis which manifests as mild eczema when triggered, with lots of allergies to nickel, parabens, and other preservatives.
+
+            Which basically means it's been a pain to find products.
+
+            Contact Form
+            If you have any suggestions, comments, questions, feel free to contact me.
+
+        </div>
     </div>
 </body>
 </html>

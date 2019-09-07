@@ -1,11 +1,9 @@
-function setDataAsTable(ingredientList, listName) {
+function setDataAsTable(ingredientList, listName, countHeader) {
   let html = "<div class='table-responsive'>"
   html += "<table class='table table-hover' style='width:60%'>";
 
-  html = setTableHeader(html);
-  console.log(ingredientList);
-  html = setTableBody(html, ingredientList);
-  console.log(html);
+  html = setTableHeader(html, countHeader);
+  html = setTableBody(html, ingredientList, countHeader);
 
   html += "</table>";
   html += "</div>";
@@ -14,26 +12,28 @@ function setDataAsTable(ingredientList, listName) {
   $(listName).html(html);
 }
 
-function setTableHeader(html) {
+function setTableHeader(html, countHeader) {
   html+="<thead style='font-weight:bold;'>";
   html+="<tr>";
   html+="<th>Ingredient</th>";
-  html+="<th>#</th>";
+  if (countHeader){
+    html+="<th>#</th>";
+  }
   html+="</tr>";
   html+="</thead>";
 
   return html;
 }
 
-function setTableBody(html, ingredientList) {
+function setTableBody(html, ingredientList, countHeader) {
   html += "<tbody>";
   let minList = returnMinTableList(ingredientList);
-  console.log(ingredientList);
-  console.log(minList);
 
-  for (var i = 0; i < minList.length; i++) {
+  for (let i = 0; i < minList.length; i++) {
     html += "<tr>";
-    html += "<td>" + minList[i][0] + "</td>";
+    if (countHeader) {
+      html += "<td>" + minList[i][0] + "</td>";
+    }
     html += "<td>" + minList[i][1] + "</td>";
     html += "</tr>";
   }
@@ -44,11 +44,6 @@ function setTableBody(html, ingredientList) {
 }
 
 function sortIngredientListAsArray(ingredientList) {
-
-  // let items = ["sos", "wow"];
-
-  // let items = [];
-  console.log(ingredientList);
   let items = Object.keys(ingredientList).map(function(key) {
     return [key, ingredientList[key]];
   });
@@ -63,7 +58,6 @@ function sortIngredientListAsArray(ingredientList) {
 function returnMinTableList(ingredientList) {
   let items = sortIngredientListAsArray(ingredientList);
   return items.slice(0, setMinTableLength(ingredientList.length));
-  // return items.slice(0, setMinTableLength(4));
 }
 
 function setMinTableLength(listLength) {
