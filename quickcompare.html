@@ -18,14 +18,19 @@
     <script src="scripts/header.js"></script>
     <script src="scripts/tableScript.js"></script>
 </head>
-<body style="font-size:18px;">
+<body>
 <div class="container">
     <div id="header"></div>
     <div class = "row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <h1 id="howToMainHeader">Quick Compare Tool</h1>
-            <span> This tool compares two products and returns two lists. It'll return both a list of ingredients that are present in both products, and a list of ingredients that are not shared by both products.<br><br>The text boxes accept either a Cosdna link or a list of comma delimited values. </span>
+            <h1 class="pageMainHeader">Quick Compare Tool</h1>
+                This tool compares two products and returns two lists. It'll return a list of ingredients
+                that are present in both products, and a list of ingredients that are not shared by both
+                products.
+                <br><br>
+                The text boxes accept either a Cosdna link or a list of comma delimited values. A maximum of
+                10 values will be presented below; to get the full list, you'll need to download the .csv file.
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -57,7 +62,7 @@
         <div class="col-md-5">
             <div class="listDiv" id="quickCompareSharedListDiv">
                 <h3>Shared Ingredients</h3>
-                <h5>(top 10 listed)</h5>
+                <h5>(only 10 listed)</h5>
                 <div id="quickCompareSharedListTable">
                     <table class="table">
                         <thead>
@@ -78,7 +83,7 @@
         <div class="col-md-5">
             <div class="listDiv" id="quickCompareUniqueListDiv">
                 <h3>Unique Ingredients</h3>
-                <h5>(top 10 listed)</h5>
+                <h5>(only 10 listed)</h5>
                 <div id="quickCompareUniqueListTable">
                     <table class="table">
                         <thead>
@@ -96,7 +101,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
     </div>
 </div>
 </body>
