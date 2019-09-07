@@ -1,17 +1,10 @@
 
-// check if cosdna is the webpage
+/*
+isCosdna:
+  Purpose: check if the url given matches the cosdna hostname
 
-
-// Get Ingredients - Takes DOM node containing ingredients table and spits out an array
-// -------------------------------------------------------------------
-// function fetchIngredientsFromCosdna (url) {
-//   if (isCosdna()) {
-//     getDomFromCosdna(url, handleCall(data))
-//   } else {
-//     console.log("ERROR IS NOT COSDNA");
-//   }
-// }
-
+  - Given a string, check if the url matches 'cosdna.com' and return a boolean
+*/
 function isCosdna(url) {
   return getHostFromUrl(url) == ('cosdna.com');
 }
@@ -19,9 +12,13 @@ function isCosdna(url) {
 /*
 addHttp:
   Purpose: check if string needs 'http://' prepended to it. We need to add the 'http://'
-  in order to grab the hostname from an anchor element. Even if this isn't a valid url,
-  we don't particularly care since we're just checking if the hostname matches with cosdna.com.
-  I think this was the simplest way to go about it without using a crap ton of Regex
+  in order to grab the hostname from an anchor element.
+
+  Notes: Even if this isn't a valid url, the 'http://' protocol added to it will
+         make it so the anchor element does think it's a valid URL. However, we don't
+         particularly care since we're just checking if the hostname matches with cosdna.com.
+         There were more Regexy ways to go about this, but I think this was the simplest way
+         to go about it for our purposes without adding additional Regex, making it hard to debug.
 
   - Given a string
     - If string doesn't have an http:// in front of it, add http:// and return
@@ -37,6 +34,12 @@ function addHttp(url) {
 getHostFromUrl:
   Purpose: grab hostname from an anchor element to check if it's a valid url
 
+  - Given a string, create an anchor element
+    - Call the addHttp method to add protocol in front of URL if it does not exist,
+      otherwise it won't be considered a valid URL by the anchor element
+    - If the hostname starts with 'www', strip it, otherwise return the hostname
+
+  - ??: ternary operator didn't work here for some reason
 */
 function getHostFromUrl (url) {
   let link = document.createElement("a");
@@ -49,7 +52,17 @@ function getHostFromUrl (url) {
   return link.hostname;
 }
 
+/*
+getDomFromCosdna:
+  Purpose: grab the HTML dom from any Cosdna webpage
 
+  Notes: In case CORS stops working suddenly, this code was pulled from
+          https://stackoverflow.com/questions/15005500/loading-cross-domain-endpoint-with-jquery-ajax
+
+  - Given a url, run the ajaxPrefilter code to add options and add the URL through the CORS-anywhere API
+  through Heroku
+    - return a new Promise wrapping the $.ajax.get method that returns the dom
+*/
 function getDomFromCosdna (url) {
   $.ajaxPrefilter( function (options) {
     if (options.crossDomain && jQuery.support.cors) {
@@ -72,9 +85,19 @@ function getDomFromCosdna (url) {
   });
 }
 
-function parseIngredients (data) {
+/*
+getIngredients:
+  Purpose: return ingredients either from DOM or from csv
+
+  - Given data, either a DOM or a string of comma delimited values
+    - If data can be parsed by HTML (meaning it's a DOM),
+      find the Cosdna table to push each result into an array
+    - If data is not a DOM, it's a string of comma delimited values --
+      set results as data and return
+*/
+function getIngredients (data) {
   let html = $.parseHTML(data);
-  var results = [];
+  let results = [];
   $(html).find('.iStuffTable .iStuffETitle').each(function(){
     results.push($(this).text())
   });
