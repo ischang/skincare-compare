@@ -3,33 +3,101 @@
     <title>Skincare Compare</title>
     <!-- CSS -->
     <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway+Dots&display=swap" rel="stylesheet">
     <link rel="stylesheet" href = "assets/css/custom.css">
 
     <!--JQUERY-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
-    <!--CUSTOM-->
-    <script src="script.js"></script>
 
+    <!--CUSTOM-->
+    <script src="scripts/script.js"></script>
+    <script src="scripts/handleDataScript.js"></script>
+    <script src="scripts/cosdna.js"></script>
+    <script src="scripts/quickCompare.js"></script>
+    <script src="scripts/header.js"></script>
+    <script src="scripts/tableScript.js"></script>
 </head>
-<body>
+<body style="font-size:18px;">
 <div class="container">
-    <h1 id="mainHeader"><div id="titleName"><a class="title" href="./index.html">Skincare Compare</a></div></h1>
-    <h3>
-        <div class = "aboutLinks">
-            <a class = "link" href="./index.html">home</a>
-            <text style="color: midnightblue; font-weight: bold;"> | </text>
-            <a class = "link" href="./howto.html">how to</a>
-            <text style="color: midnightblue; font-weight: bold;"> | </text>
-            <a class = "link" href="./quickcompare.html">quick compare</a>
-            <text style="color: midnightblue; font-weight: bold;"> | </text>
-            <a class = "link" href="./resources.html">resources</a>
-            <text style="color: midnightblue; font-weight: bold;"> | </text>
-            <a class = "link" href="./about.html">about</a>
+    <div id="header"></div>
+    <div class = "row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <h1 id="howToMainHeader">Quick Compare Tool</h1>
+            <span> This tool compares two products and returns two lists. It'll return both a list of ingredients that are present in both products, and a list of ingredients that are not shared by both products.<br><br>The text boxes accept either a Cosdna link or a list of comma delimited values. </span>
         </div>
-    </h3>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+            <br>
+            <div class ="form-group" id="dataA">
+                <label class ="quickCompareLabel" for="textDataA">Data A</label>
+                <textarea class="form-control" style="min-width: 100%" id="textDataA" rows="7" placeholder="EXAMPLE: Water, Glycerin, Methylparaben, Fragrance"></textarea>
+
+            </div>
+        </div>
+        <div class="col-md-5">
+            <br>
+            <div class ="form-group" id="dataB">
+                <label class ="quickCompareLabel" for="textDataB"> Data B</label>
+                <textarea class="form-control" style="min-width: 100%" id="textDataB" rows="7" placeholder="EXAMPLE: http://www.cosdna.com/eng/cosmetic_df52126587.htm"></textarea>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        </div>
+    <div class="row">
+        <br>
+        <center><input type="submit" class="btn btn-custom" value="Compare" onclick="quickCompareMain()"></center>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+            <div class="listDiv" id="quickCompareSharedListDiv">
+                <h3>Shared Ingredients</h3>
+                <h5>(top 10 listed)</h5>
+                <div id="quickCompareSharedListTable">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Ingredient</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="downloadInputWrapper">
+                    <form class="formClass" onsubmit="download(this['name'].value, 'quickCompareSharedList', true, event)">
+                        <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="sharedList.csv"></div>
+                        <input type="submit" class="btn btn-custom" value="Download">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="listDiv" id="quickCompareUniqueListDiv">
+                <h3>Unique Ingredients</h3>
+                <h5>(top 10 listed)</h5>
+                <div id="quickCompareUniqueListTable">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Ingredient</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="downloadInputWrapper">
+                    <form class="formClass" onsubmit="download(this['name'].value, 'quickCompareUniqueList', true, event)">
+                        <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="text.csv"></div>
+                        <input type="submit" class="btn btn-custom" value="Download">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
 </div>
 </body>
 </html>
