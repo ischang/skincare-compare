@@ -1,6 +1,7 @@
-let waterList = ["aqua", "eau", "water", "h20", "purified water"];
+let waterList = ["aqua", "eau", "water", "h20", "purified water", "water purified"];
 let goodWords = ["safe", "good", "yes"];
 let badWords = ["allergic", "bad", "no"];
+let isNotExclusiveListNames = ["sharedList", "quickCompareSharedList", "quickCompareUniqueList"];
 let errors = [];
 let lists = {};
 
@@ -27,9 +28,10 @@ function uploadCsvFile(event) {
           lists["allergicListExclusive"] = result[1].exclusiveLists.allergicListExclusive;
           lists["safeListExclusive"] = result[1].exclusiveLists.safeListExclusive;
 
-          setDataAsTable(lists.sharedList, "sharedList");
-          setDataAsTable(lists.safeList, "safeList");
-          setDataAsTable(lists.allergicList, "allergicList");
+          console.log(lists);
+          setDataAsTable(lists.sharedList, "sharedList", true);
+          setDataAsTable(lists.safeList, "safeList", true);
+          setDataAsTable(lists.allergicList, "allergicList", true);
 
           if(errors.length > 0) {
             console.log("There are errors");
@@ -38,19 +40,6 @@ function uploadCsvFile(event) {
           }
 
         });
-        // handleData(data).then(function(dataLists) {
-        //   lists = dataLists;
-        //   console.log(dataLists);
-        //   setDataAsTable(dataLists.sharedList, "sharedList");
-        //   setDataAsTable(dataLists.safeList, "safeList");
-        //   setDataAsTable(dataLists.allergicList, "allergicList");
-        //
-        //   if(errors.length > 0) {
-        //     console.log("There are errors");
-        //   } else {
-        //     console.log('Imported -' + data.length + '- rows successfully!');
-        //   }
-        // });
       } else {
         errors.push("No data to import!");
         console.log('No data to import!');
@@ -79,25 +68,24 @@ function setFileNameOnUpload(file) {
 
 function isDefaultList(listname) {
   if (listname == "safeList") {
-    console.log(document.getElementById("safeRadio").checked);
     return document.getElementById("safeRadio").checked;
   } else if (listname == "allergicList") {
     return document.getElementById("allergicRadio").checked;
   }
 }
 
-function download(filename, listName, event) {
+function download(filename, listName, quickCompare, event) {
   event.preventDefault();
 
   if (Object.keys(lists).length == 0) {
     window.alert("You need to upload a CSV first!");
   }
 
-  if (listName != "sharedList" && !isDefaultList(listName)) {
+  if (!isNotExclusiveListNames.includes(listName) && !isDefaultList(listName)) {
     listName = listName+"Exclusive";
   }
 
-  let csvContent = createCsvContent(sortIngredientListAsArray(lists[listName]));
+  let csvContent = createCsvContent(sortIngredientListAsArray(lists[listName]), quickCompare);
   let blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8'});
 
   if(window.navigator.msSaveOrOpenBlob) {
@@ -116,15 +104,21 @@ function download(filename, listName, event) {
   }
 }
 
-function createCsvContent(list) {
+function createCsvContent(list, quickCompare) {
   let lineArray = [];
+  let header = quickCompare ? "Ingredient" : "Ingredient, #";
 
-  lineArray.push("Ingredient,#");
+  lineArray.push(header);
 
-  console.log(list);
-  list.forEach(function (infoArray) {
-    lineArray.push(infoArray.join(","));
-  });
+  if (quickCompare) {
+    list.forEach(function (infoArray) {
+      lineArray.push(infoArray[1]);
+    });
+  } else {
+    list.forEach(function (infoArray) {
+      lineArray.push(infoArray.join(","));
+    });
+  }
 
   return lineArray.join("\n");
 }

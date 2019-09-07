@@ -3,14 +3,10 @@
 	  <title>Skincare Compare</title>
 	  <!-- CSS -->
 		<link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway+Dots&display=swap" rel="stylesheet">
         <link rel="stylesheet" href = "assets/css/custom.css">
 	  <!--JQUERY-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <!--<script-->
-                <!--src="https://code.jquery.com/jquery-3.4.1.slim.js"-->
-                <!--integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI="-->
-                <!--crossorigin="anonymous"></script>-->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
       <!--CUSTOM-->
@@ -18,24 +14,12 @@
         <script src="scripts/tableScript.js"></script>
         <script src="scripts/handleDataScript.js"></script>
         <script src="scripts/cosdna.js"></script>
-
+        <script src="scripts/quickCompare.js"></script>
+        <script src="scripts/header.js"></script>
     </head>
 	<body>
         <div class="container">
-            <h1 id="mainHeader"><div id="titleName"><a class="title" href="./index.html"> Skincare Compare </a></div></h1>
-            <h3>
-                <div class = "aboutLinks">
-                    <a class = "link" href="./index.html">home</a>
-                    <text style="color: midnightblue; font-weight: bold;"> | </text>
-                    <a class = "link" href="./howto.html">how to</a>
-                    <text style="color: midnightblue; font-weight: bold;"> | </text>
-                    <a class = "link" href="./quickcompare.html">quick compare</a>
-                    <text style="color: midnightblue; font-weight: bold;"> | </text>
-                    <a class = "link" href="./resources.html">resources</a>
-                    <text style="color: midnightblue; font-weight: bold;"> | </text>
-                    <a class = "link" href="./about.html">about</a>
-                </div>
-            </h3>
+            <div id="header"></div>
             <br>
             <div id="uploadInputWrapper">
                 <div class="input-group" id="formInput">
@@ -74,8 +58,8 @@
                                 <label><input id="safeExclusiveRadio" type="radio" name="safeRadio">safe ingredients list, without allergic ingredients</label>
                             </div>
                         </div>
-                        <form class="formClass" onsubmit="download(this['name'].value, 'safeList', event)">
-                            <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="text.csv"></div>
+                        <form class="formClass" onsubmit="download(this['name'].value, 'safeList', false, event)">
+                            <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="safeList.csv"></div>
                             <input type="submit" class="btn btn-custom" value="Download">
                         </form>
                     </div>
@@ -104,8 +88,8 @@
                                 <label><input id="allergicExclusiveRadio" type="radio" name="allergicRadio">allergic ingredients list, without safe ingredients</label>
                             </div>
                         </div>
-                        <form class="formClass" onsubmit="download(this['name'].value, 'safeList', event)">
-                            <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="text.csv"></div>
+                        <form class="formClass" onsubmit="download(this['name'].value, 'allergicList', false, event)">
+                            <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="allergicList.csv"></div>
                             <input type="submit" class="btn btn-custom" value="Download">
                         </form>
                     </div>
@@ -131,8 +115,8 @@
                                 <label><input id="sharedRadio" type="radio" name="sharedRadio" checked>shared ingredients list</label>
                             </div>
                         </div>
-                        <form class="formClass" onsubmit="download(this['name'].value, 'sharedList', event)">
-                            <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="text.csv"></div>
+                        <form class="formClass" onsubmit="download(this['name'].value, 'sharedList', false, event)">
+                            <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="sharedList.csv"></div>
                             <input type="submit" class="btn btn-custom" value="Download">
                         </form>
                     </div>
