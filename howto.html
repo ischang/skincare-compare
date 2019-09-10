@@ -17,50 +17,150 @@
         <div id="header"></div>
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <h1 class="pageMainHeader">How To</h1>
-            <h2 class="sectionHeader">To start:</h2>
+            <h1 class="pageMainHeader">How To </h1>
+            <br>
+            <div id="toc_container">
+                <p class="toc_title">Contents</p>
+                <ul class="toc_list">
+                    <li><a href="#ToStart">To Start</a>
+                        <ul>
+                            <li><a href="#YouCanGetACsvBy">You can get a .csv file by:</a></li>
+                            <li><a href="#TwoColumns">You will need at least 2 columns:</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#ExampleSheetsAndTemplates">Example Sheets and Templates</a></li>
+                    <li><a href="#FormattingYourCsvFile">Formatting Your .csv File</a>
+                        <ul>
+                            <li><a href="#IngredientsColumnHowTo">Ingredients Column</a>
+                                <ul>
+                                    <li><a href="#CosdnaLinkHowTo">Cosdna link</a></li>
+                                    <li><a href="#CommaSeparatedValues">Comma separated values</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#ResultsColumnHowTo">Results Column</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#TablesAndDownloadOptions">Tables and Download Options</a></li>
+                    <li><a href="#QuickCompareHowTo">Quick Compare</a></li>
+                </ul>
+            </div>
+            <h2 class="sectionHeader" id="ToStart">To Start:</h2>
                 <div class="howToText">
+                    Please read over this guide carefully. I realize this is an extremely long and detailed guide, but if you don't follow these instructions to a T, this tool may not work
+                    as expected.
+                    <br><br>
                     This tool assumes you already have a .csv file in the expected format. If you don't know what a .csv file is, click <a href="https://www.computerhope.com/issues/ch001356.htm">here</a> for an explanation.
-                    <h4 class="subHeader">You can get a .csv file by:</h4>
+                    <h4 class="subHeader" id="YouCanGetACsvBy">You can get a .csv file by:</h4>
                     <ul>
                         <li>exporting from <a href="https://docs.google.com/spreadsheets/u/0/">Google Sheets/Google Drive</a></li>
                         <li>exporting from <a href="https://products.office.com/en-us/excel">Microsoft Excel</a></li>
                         <li>exporting from <a href="https://en.wikipedia.org/wiki/List_of_spreadsheet_software">another spreadsheet program</a></li>
-                        <li>creating your own .csv file from a simple text editor (like Notepad, Sublime, or TextEdit)</li>
+                        <li>creating your own .csv file from a simple text editor (like Notepad, Atom, Sublime, or TextEdit)</li>
                     </ul>
-                    <h4 class="subHeader">You will need at least 2 columns:</h4>
+                    <h4 class="subHeader" id="TwoColumns">You will need at least 2 columns:</h4>
                     <ul>
                         <li>Ingredients</li>
                         <li>Result</li>
                     </ul>
-                    You can add other columns, but the tool will ignore them.
+                    You can add other columns, but the tool will ignore them. The column names are case sensitive, which means
+                    the column name has to be "Ingredients" and not "ingredients" or "iNgrediEnts".
                 </div>
-            <h2 class="sectionHeader">Ingredients Column</h2>
+            <h2 class="sectionHeader" id="ExampleSheetsAndTemplates">Example Sheets and Templates</h2>
                 <div class="howToText">
-                    The Ingredients column expects ingredients separated by commas with a space before it, e.g.: <br><br>
-
-                    <div style="margin-left:4em;"><i>Water, Glycerin, Butylene Glycol, Rice Ferment Filtrate (Sake), Glutamic Acid, Arginine, Leucine, Ceramide 3, Ceramide 6, Placental Protein, Arbutin,Dipotassium Glycyrrhizate (Licorice Root Extract), Glycine Soja (Soybean) Protein, Maltitol, Methyl Gluceth-10, Peg-6 Hydrogenated Castor Oil, Hydroxyethylcellulose, Sodium Styrene/Acrylates Copolymer, Citric Acid, Sodium Citrate, Phenoxyethanol, Methylparaben, Fragrance</i></div>
-                    <br>
-                    <h4 class="subHeader">Notes:</h4>
+                    Here are example spreadsheets that you can base your .csv on, if you'd like:
                     <ul>
-                        <li><span class="emphasis">will NOT work</span> if ingredients are separated by:
-                            <ul>
-                                <li>only white spaces (e.g. <i>Water Glycerin Butylene Glycol Rice Ferment Filtrate (Sake), etc)</i></li>
-                                <li>commas with no spaces in between (e.g. <i>Water,Glycerin,Butylene Glycol,Rice Ferment Filtrate (Sake), etc)</i></li>
-                            </ul>
-                        </li>
-                        <li>the following synonyms of water will be replaced with "water" in the spreadsheet: <span class="emphasis">aqua, eau, h20, and purified water</span></li>
-                        <li>the tool is <span class="emphasis">NOT case sensitive</span>, so if your ingredients are in caps or differently cased, the tool will make them all lowercase</li>
-                        <li>if there is an ingredient that has a comma in them, such as "1,2-hexanediol", the tool will count it as a single ingredient, but it won't show up properly in the CSV</li>
+                        <li>A very rough and basic spreadsheet template that will work with this tool, with some examples: <a href="./test_csvs/Template.csv">here</a></li>
+                        <li>Part of my spreadsheet, exported on 9/9/2019 from Google Sheets. It is not up to date and only presented
+                            here as a working example of what your spreadsheet could look like: <a href="/test_csvs/MySampleSkincare.csv">here</a> </li>
+                        <li>The spreadsheet I copied my spreadsheet from originally, from Snow White and the Asian Pear.
+                            You will need to make changes to this spreadsheet if you want it to be compatible with this tool: <a href="http://www.snowwhiteandtheasianpear.com/p/spreadsheet.html">here</a></li>
                     </ul>
-
-                    <span class="emphasis">This tool isn't perfect.</span> It's just meant to make ingredient comparing a lot easier. You should still look over the returned .csv yourself and make any corrections.
+                    I prefer to use Google Sheets, but you can use whatever spreadsheet software you choose to import your .csv or export your spreadsheet as a .csv.
                 </div>
-            <h3>Results</h3>
-            The Results column expects values for safe products as: "safe", "good", "yes"; for allergic/bad products: "allergic", "bad", "no"; and for untested products "TBD".
-            <h3>Tables</h3>
-            The tables, by default, will only show the top 10 results from each category. If you want to see the whole list, you will need to download the spreadsheet.
-            <h3>Sheets</h3>
+            <h2 class="sectionHeader" id="FormattingYourCsvFile">Formatting Your .csv File</h2>
+                <div>
+                    <div class="howToText">
+                        <h3 id="IngredientsColumnHowTo">Ingredients Column</h3>
+                            <div class="howToText">
+                                The Ingredients column can take in <span class="emphasis">a Cosdna link</span> or <span class="emphasis">a list of comma separated ingredients</span>. You can have a mix of both in the spreadsheet.
+                                <h4 class="subsubHeader" id="CosdnaLinkHowTo">CosDna link</h4>
+                                    <div class="howToText">
+                                        You can input a CosDna link to a specific product, such as:
+                                        <a href="http://www.cosdna.com/eng/cosmetic_f0ff366349.html">http://www.cosdna.com/eng/cosmetic_f0ff366349.html</a>.
+                                        <br><br>
+                                        There's no specific way you need to format the link, so long as it's a link to the particular product. Just put the link
+                                        in and the tool will do the work scraping the ingredients from the product page.
+                                    </div>
+                                <h4 class="subsubHeader" id="CommaSeparatedValues">Comma separated ingredients list</h4>
+                                <div class="howToText">
+                                    The Ingredients column expects ingredients separated by commas with a space before it, e.g.: <br><br>
+
+                                    <div style="margin-left:4em;"><i>Water, Glycerin, Butylene Glycol, Rice Ferment Filtrate (Sake), Glutamic Acid, Arginine, Leucine, Ceramide 3, Ceramide 6, Placental Protein, Arbutin,Dipotassium Glycyrrhizate (Licorice Root Extract), Glycine Soja (Soybean) Protein, Maltitol, Methyl Gluceth-10, Peg-6 Hydrogenated Castor Oil, Hydroxyethylcellulose, Sodium Styrene/Acrylates Copolymer, Citric Acid, Sodium Citrate, Phenoxyethanol, Methylparaben, Fragrance</i></div>
+                                    <br>
+                                    <h4 class="subHeader" style="font-size: 20px;">Important Notes:</h4>
+                                    <ul>
+                                        <li>the tool <span class="emphasis">will NOT work</span> if ingredients are separated by:
+                                            <ul>
+                                                <li>only white spaces (e.g. <i>Water Glycerin Butylene Glycol Rice Ferment Filtrate (Sake), etc)</i></li>
+                                                <li>commas with no spaces in between (e.g. <i>Water,Glycerin,Butylene Glycol,Rice Ferment Filtrate (Sake), etc)</i></li>
+                                            </ul>
+                                        </li>
+                                        <li>the following synonyms of water will be replaced with "water" in the spreadsheet: <span class="emphasis">"aqua", "eau", "h20", "purified water", "water purified"</span></li>
+                                        <li>the tool is <span class="emphasis">NOT case sensitive</span>, so if your ingredients are in caps or differently cased, the tool will make them all lowercase</li>
+                                        <li>if there is an ingredient that has a comma in them, such as "1,2-hexanediol", the tool will count it as a single ingredient, but it won't show up properly in the CSV</li>
+                                    </ul>
+                                    <span class="emphasis">This tool isn't perfect.</span> It's just meant to make ingredient comparing a lot easier. You should still look over the returned .csv yourself and make any corrections.
+                                </div>
+                            </div>
+
+                        <h3 id="ResultsColumnHowTo">Results Column</h3>
+                           <div class="howToText">
+                               The <span class="emphasis">Results</span> column expects these values:
+                               <ul>
+                                   <li>Safe products: <span class="emphasis">"safe", "good",</span> or<span class="emphasis"> "yes"</span></li>
+                                   <li>Bad products: <span class="emphasis">"allergic", "bad",</span> or<span class="emphasis"> "no"</span></li>
+                                   <li>Untested products or products without verdict: <span class="emphasis">"TBD"</span></li>
+                               </ul>
+                           </div>
+                    </div>
+                </div>
+            <h2 class="sectionHeader" id="TablesAndDownloadOptions">Tables and Download Options</h2>
+                <div class="howToText">
+                    The tables, by default, will only show the <span class="emphasis">top 10 ingredients</span>, sorted
+                    by quantity (how often they appear in the whole spreadsheet) from each category.
+                    <br> <br>
+                    If you want to see the whole list, you will need to download the spreadsheet. You can change the
+                    name of your download file in the text box. By default, it will be
+                    <span class="emphasis">[LISTNAME].csv</span>. The download location will be your browser's specified
+                    download location.
+                    <br><br>
+                    There are several options for you to download. You can download
+                    <ul>
+                        <li><span class="emphasis">safe list</span></li>
+                        <dd>a list with all the ingredients under the "safe" products and their counts</dd>
+                        <li><span class="emphasis">safe list exclusive</span></li>
+                        <dd>a list with all the ingredients under the "safe" products and their counts, excluding any ingredients that have appeared
+                        in the allergic column</dd>
+                        <li><span class="emphasis">allergic list</span></li>
+                        <dd>a list with all the ingredients under the "allergic" products and their counts</dd>
+                        <li><span class="emphasis">alergic list exclusive</span></li>
+                        <dd>a list with all the ingredients under the "allergic" products and their counts, excluding any ingredients that have appeared
+                        in the safe column</dd>
+                        <li><span class="emphasis">shared list</span></li>
+                        <dd>a list with ALL the ingredients and their counts</dd>
+                    </ul>
+                </div>
+            <h2 class="sectionHeader" id="QuickCompareHowTo">Quick Compare</h2>
+                <div class="howToText">
+                    The quick compare tool works very similarly to the spreadsheet tool on the homepage. You will not need
+                    a .csv -- you input either a Cosdna link or a list of comma separated ingredients.
+                    <br><br>
+                    You will get two lists: the shared list gives you all the ingredients the two products shared, and the unique list
+                    gives you all the ingredients the two products do not share. Similarly, it will only show ten
+                    ingredients and you will need to download the files to see the whole list.
+                    <br><br>
+                    These lists will not give back the counts, since they either share or do not share these ingredients.
+                </div>
         </div>
         <div class="col-sm=2"></div>
     </div>

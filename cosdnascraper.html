@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>Skincare Compare</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300|Raleway+Dots&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href = "assets/css/custom.css">
+
+    <!--JQUERY-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+    <!--CUSTOM-->
+    <script src="scripts/script.js"></script>
+    <script src="scripts/handleDataScript.js"></script>
+    <script src="scripts/cosdna.js"></script>
+    <script src="scripts/header.js"></script>
+    <script src="scripts/cosdnaScraper.js"></script>
+</head>
+<body>
+<div class="container">
+    <div id="header"></div>
+    <div class = "row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <h1 class="pageMainHeader">CosDna Scraper</h1>
+            This CosDna scraper tool allows you to input a CosDna link return a list of comma
+            separated values below. <br><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <div class ="form-group" id="cosdnaInputForm">
+                <label class ="textAreaLabel" for="cosdnaInput">CosDna link</label>
+                <textarea class="form-control" style="min-width: 100%" id="cosdnaInput" rows="4" placeholder="EXAMPLE: http://www.cosdna.com/eng/cosmetic_df52126587.htm"></textarea>
+            </div>
+            <div class="formRadios" id="spaceRadios">
+                <div class="radio">
+                    <label><input id="spaceRadio" type="radio" name="spaceRadio" checked>spaces between commas</label>
+                </div>
+                <div class="radio">
+                    <label><input id="noSpaceRadio" type="radio" name="spaceRadio">no spaces between commas</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group" id="scrapedOutput">
+                <label class="textAreaLabel" for="scrapedResult">Output</label>
+                <textarea class="form-control" class="form-control" style="min-width: 100%" rows="10" id="scrapedResult"></textarea>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <br>
+            <center><input type="submit" class="btn btn-custom" value="Scrape" onclick="cosdnaScrapeMain()"></center>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
