@@ -29,8 +29,8 @@
                 that are present in both products, and a list of ingredients that are not shared by both
                 products.
                 <br><br>
-                The text boxes accept either a Cosdna link or a list of comma delimited values. A maximum of
-                10 values will be presented below; to get the full list, you'll need to download the .csv file.
+                The text boxes accept either a Cosdna link or a list of comma separated values. A maximum of
+                10 ingredients will be presented below; to get the full list, you'll need to download the .csv file.
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -39,15 +39,14 @@
         <div class="col-md-5">
             <br>
             <div class ="form-group" id="dataA">
-                <label class ="quickCompareLabel" for="textDataA">Data A</label>
+                <label class ="textAreaLabel" for="textDataA">Data A</label>
                 <textarea class="form-control" style="min-width: 100%" id="textDataA" rows="7" placeholder="EXAMPLE: Water, Glycerin, Methylparaben, Fragrance"></textarea>
-
             </div>
         </div>
         <div class="col-md-5">
             <br>
             <div class ="form-group" id="dataB">
-                <label class ="quickCompareLabel" for="textDataB"> Data B</label>
+                <label class ="textAreaLabel" for="textDataB"> Data B</label>
                 <textarea class="form-control" style="min-width: 100%" id="textDataB" rows="7" placeholder="EXAMPLE: http://www.cosdna.com/eng/cosmetic_df52126587.htm"></textarea>
             </div>
         </div>
@@ -95,7 +94,7 @@
                 </div>
                 <div class="downloadInputWrapper">
                     <form class="formClass" onsubmit="download(this['name'].value, 'quickCompareUniqueList', true, event)">
-                        <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="text.csv"></div>
+                        <div class="filenameInputWrapper"><input type="text" class="form-control" name="name" placeholder="filename" value="uniqueList.csv"></div>
                         <input type="submit" class="btn btn-custom" value="Download">
                     </form>
                 </div>
