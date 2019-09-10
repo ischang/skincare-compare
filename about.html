@@ -18,47 +18,101 @@
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
-                <h1 class="pageMainHeader">About && Other Notes</h1>
+                <h1 class="pageMainHeader">About</h1>
                 <h3 class="subHeader">About this website</h3>
+                <p class="howToText">
                     This <a href="https://xkcd.com/148/">wobsite</a> was written in: vanilla Javascript,
-                    some Ajax/JQuery, HTML/CSS and Twitter Bootstrap magic. It's hosted on Github pages
+                    some Ajax/JQuery, HTML/CSS, and Twitter Bootstrap magic. The code
+                    lives <a href="https://github.com/ischang/skincare-compare">here</a>. It's hosted on Github pages
                     and all the business logic is done completely client side.
                     <br><br>
                     Basically, that means nothing you input will get stored (except by your own local
                     machine/browser) -- there's no server on my end or anything that's going to see what
-                    you typed or uploaded.
+                    you typed, uploaded, or downloaded.
+                    <br><br>
+                    This tool also works with not just skincare products, but any product that has an
+                    ingredient list as long as you provide a CSV with the specified columns. So while I may
+                    call it a Skincare Compare tool since that's what I primarily use it for, it's basically
+                    just a CSV comparison tool (with the addition of Cosdna scraping).
                     <br>
-                <h3 class="subHeader">Creative Commons</h3>
-                    This tool is under a Creative Commons License.
-                    <br>
+                </p>
                 <h3 class="subHeader">Why I wrote this</h3>
-                    This website began as a simple Python script to make my life easier. I have extremely sensitive skin
-                    that breaks out in severe eczema patches when triggered by allergens or heat, so finding products
-                    that worked for my skin has always been extremely difficult.
-                    <br><br>
-                    For years, I avoided skincare products and never put on sunscreen or moistuirizer because it was
-                    always a gamble of whether my face would blow up and turn scaly. But one day, I thought enough was enough.
-                    Through trial and error, loads of research, I started a spreadsheet and started comparing what
-                    products worked, and what triggered my eczema.
-                    <br><br>
-                    I wanted a tool that could let me compare the laundry list of ingredients that each product seemed
-                    to have, but besides this <a href="https://www.reddit.com/r/AsianBeauty/comments/3g34we/cosdna_comparison_tool/">
-                    Cosdna tool I found on Reddit</a>, which didn't work for me, there wasn't anything else.
-                    <br><br>
-                    So I wrote this. The logic behind the scripts I wrote are relatively simple, but it hopefully works
-                    in a way to make comparing ingredients simpler. :)
-                <h3 class="subHeader">Other</h3>
-                    If you notice any bugs, feel free to contact me below. If you do decide to contact me,
-                    please give me the steps to reproduce the bug and, if you're able to, provide me with any
-                    console logs by going to the <a href="https://www.lifewire.com/web-browser-developer-tools-3988965">Developer Tools</a>
-                    in your browser and clicking the 'Console' tab.
-                    <br><br>
-                    This tool can also work with not just skincare products, but any product that has an ingredient list as long as you provide a CSV with the specified columns.
-                    <br><br>
-
-
-                    <h3 class="subHeader">Contact Form</h3>
-                If you have any suggestions, comments, questions, feel free to contact me.
+                    <p class="howToText">
+                        This website began as a simple script to make my life easier. I have extremely sensitive skin
+                        that breaks out in extremely itchy, eczema patches when triggered by allergens or
+                        heat, so finding products that worked for my skin has always been extremely difficult.
+                        <br><br>
+                        Testing out products was always a mess of trial and error, loads of research,
+                        dozens of decant bottles and ritual patch testing. I started a spreadsheet in late 2018/early 2019 and started comparing
+                        what products worked and what triggered my contact/atopic dermatitis and eczema. But as my list grew,
+                        comparing ingredients became a tedious chore.
+                        <br><br>
+                        I wanted a tool that could let me compare the laundry list of ingredients that each product seemed
+                        to have, but besides this <a href="https://www.reddit.com/r/AsianBeauty/comments/3g34we/cosdna_comparison_tool/">
+                        Cosdna tool I found on r/AsianBeauty</a>, which didn't work for me, there wasn't anything else.
+                        <br><br>
+                        So I wrote this. I was inspired by the tool above to add Cosdna scraping, but beyond that,
+                        the code is my own. It's not the prettiest and the logic is rather simple, but it made my life
+                        easier comparing ingredients. And, hopefully, it'll make your life easier as well.
+                        Happy holy grail and skincare hunting!
+                    </p>
+                <h3 class="subHeader">Bugs</h3>
+                    <p class="howToText">
+                        If you're having problems with the tool, first read the <a href="/howto.html">How To</a> guide in detail. If you're sure
+                        what you're experiencing is a bug, feel free to contact me below.
+                        <br><br>
+                        If you do decide to contact me, please give me your browser, browser version,
+                        the steps to reproduce the bug and, if you're able to, provide me with any
+                        console logs by going to the <a href="https://www.lifewire.com/web-browser-developer-tools-3988965">Developer Tools</a>
+                        in your browser and clicking the 'Console' tab.
+                        <br><br>
+                        Alternatively, you can report the bug as an Issue on
+                        <a href="https://github.com/ischang/skincare-compare">Github</a>. If you know how to fix the bug,
+                        you can open a Pull Request.
+                        <br><br>
+                        I don't guarantee I'll review PRs, issues, or fix any bugs on a timely basis -- I can try, but I do have a day job
+                        and a life and I made this in my spare time over many, many months.
+                    </p>
+                <h3 class="subHeader">Disclaimer and Code</h3>
+                    <p class="howToText">
+                        I am not a skincare professional or a dermatologist and I am not licensed to give advice.
+                        Any resources I provided on this website are resources I personally found helpful for my own skincare routine. It is not
+                        licensed medical advice.
+                        <br><br>
+                        This tool is also meant to be used for skincare comparison/ingredient comparison
+                        purposes ONLY and I am not responsible for however any of these tools get used or
+                        purposed.
+                        <br><br>
+                        There may also be bugs or edge cases in the tool that might not give completely accurate information.
+                        I tested as much as I could, but like I mentioned in the how to guide, this tool is not perfect.
+                        It is up to the user themselves to verify the complete accuracy and authenticity of the output that was returned.
+                        <br><br>
+                        This website's functionality also may not work on all browsers and browser versions. For the most part,
+                        it should work and be cross compatible with most browsers. I am not responsible for what happens
+                        to your browser should you choose to use this tool and something breaks.
+                        <br><br>
+                        I've only made this website available under my own personal Github repository. Please
+                        verify the authenticity of the website you are visiting, as I am not responsible for any copycats. I could be paranoid,
+                        but as the code for this website is made publicly available, anyone can easily copy the code and make their
+                        own malicious version of this website.
+                        <br><br>
+                        And, as a final note, if you are worried about how this website works, all the code and available .csv files
+                        are on Github -- the .csv files are under 'test_csvs' and all the code is available under 'scripts',
+                        with comments over each method.
+                    </p>
+                <h3 class="subHeader">Creative Commons</h3>
+                    <p class="howToText">
+                        <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+                        <img alt="Creative Commons License" style="border-width:0"
+                        src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /><br>
+                        </a><br />This Skincare Compare website and its respective code is licensed under a
+                        <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons
+                        Attribution-NonCommercial 4.0 International License</a>.
+                    </p>
+                <h3 class="subHeader">Contact me</h3>
+                    <p class="howToText">
+                        If you have any suggestions, comments, questions, feel free to contact me @ blah@gmail.com
+                    </p>
             </div>
             <div class="col-sm-2"></div>
         </div>

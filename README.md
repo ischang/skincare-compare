@@ -57,23 +57,21 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 - [x] 1) 2 sheets: shared for all good, shared for all bad 
 - [x] 2) 2 sheets: all the good ingredients without the bad ingredients, all the bad ingredients - good one 
 - [x] 3) ignores result column and just finds all common ingredients into one download
-- [ ] downloadable example csv
-- [ ] cosdna scraping support https://stackoverflow.com/questions/15005500/loading-cross-domain-endpoint-with-jquery-ajax
+- [] downloadable example csv
+- [x] cosdna scraping support https://stackoverflow.com/questions/15005500/loading-cross-domain-endpoint-with-jquery-ajax
 - [ ] test various cases (see below)
-- [ ] make how to use this guide (how to do comma deliminiation, result can say: good, bad, allergic, explain that water/aqua -> is just water, google spreadsheet -> CSV, example basic CSV, resources, and about page
-- [ ] make quick 2 compare page (for two columns, either cosdna or ingredient list delimited by commas) with two columns 
+- [x] make how to use this guide (how to do comma deliminiation, result can say: good, bad, allergic, explain that water/aqua -> is just water, google spreadsheet -> CSV, example basic CSV, resources, and about page
+- [x] make quick 2 compare page (for two columns, either cosdna or ingredient list delimited by commas) with two columns 
 
 # to test and do for readiness:
 - [x] water (need to fully sanitize)
 - [x] sanitize inputs for special characters (v strange)
 - [x] add exception for "1,2..." 
 - [ ] testing bigger spreadsheets with more columns and various edge cases for the merge
-- [ ] download as .txt/.csv dropdown/button/radio set maybe for better ux?
 - [ ] error alert cleanups in console and the like 
 - [ ] change index.html -> home 
 
 # refs
 i haven't written a webapp in so long and i refuse to write in javascript so i need to consult beginner tutorials that i am compiling here:
 somewhat inspired by: https://github.com/ytilis/CosDNA_Compare/blob/master/cosdna.js
-- https://stackoverflow.com/questions/3665115/create-a-file-in-memory-for-user-to-download-not-through-server
 

@@ -69,7 +69,8 @@ function getList(csvObject, dict) {
   return getRawData(csvObject["Ingredients"]).then(function (data) {
     dict = iterateThroughDictionary(getIngredients(data), dict);
   }).catch(function(error){
-    console.log(error);
+    console.log("getList: " + error);
+    console.log("getList csbObject: " + csvObject);
   })
 }
 
@@ -130,7 +131,8 @@ function createSharedList (csvDataArray) {
   return Promise.all(promises).then( () => {
     return sharedList;
   }).catch(function(error){
-    console.log(error);
+    console.log("createSharedList: " + error);
+    console.log("createSharedList csvDataArray: " + csvDataArray);
   });
 
   return Promise.resolve(sharedList);
@@ -177,7 +179,8 @@ function createSafeAllergicLists(csvDataArray) {
       allergicList: allergicList
     };
   }).catch(function(error){
-    console.log(error);
+    console.log("createSafeAllergicLists: " + error);
+    console.log("createSafeAllergicLists csvDataArray: " + csvDataArray);
   });
 }
 
@@ -207,9 +210,8 @@ function iterateThroughDictionary(ingredients, dict) {
     });
 
   } catch (error) {
-    console.log(error)
-    //will do this twice unless i do this check outside
-    errors.push("You do not have an \'Ingredients\' column")
+    console.log("iterateThroughDictionary: you may not have an 'Ingredients' column");
+    console.log("iterateThroughDictionary: " + error);
   }
 
   return dict;
