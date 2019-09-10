@@ -9,9 +9,7 @@ quickCompare:
     - Merge two lists and run a filter to exclude what's in the sharedList to get an exclusiveList
     - Return both lists
 */
-
 function quickCompareMain() {
-  console.log("hi");
   let dataA = document.getElementById('textDataA').value;
   let dataB = document.getElementById('textDataB').value;
 
@@ -25,22 +23,29 @@ function quickCompareMain() {
 }
 
 function quickCompare(columnA, columnB) {
-  return getRawData(columnA).then(function(dataA){
-    dataA = Object.keys(iterateThroughDictionary(getIngredients(dataA), {}))
-    return getRawData(columnB).then(function(dataB){
-      dataB = Object.keys(iterateThroughDictionary(getIngredients(dataB), {}));
+  if (jQuery.isEmptyObject(columnA) || jQuery.isEmptyObject(columnB)) {
+    window.alert("One or both of your text boxes are empty! Please input either a cosdna link or a list of comma separated values.");
+    console.log("Quick compare: user inputted empty data.")
+  } else {
+    return getRawData(columnA).then(function (dataA) {
+      dataA = Object.keys(iterateThroughDictionary(getIngredients(dataA), {}))
+      return getRawData(columnB).then(function (dataB) {
+        dataB = Object.keys(iterateThroughDictionary(getIngredients(dataB), {}));
 
-      let quickCompareSharedList = dataA
+        let quickCompareSharedList = dataA
           .filter(object => dataB.includes(object));
-      let mergedList = dataA.concat(dataB);
-      let quickCompareUniqueList = mergedList
+        let mergedList = dataA.concat(dataB);
+        let quickCompareUniqueList = mergedList
           .filter(object => quickCompareSharedList.indexOf(object) === -1);
 
-      return new Promise(function (resolve){
-        resolve({quickCompareSharedList, quickCompareUniqueList});
+        return new Promise(function (resolve) {
+          resolve({quickCompareSharedList, quickCompareUniqueList});
+        })
+      }).catch(function (error) {
+        console.log("quickCompare: " + error);
+        console.log("quickCompare column A: " + columnA);
+        console.log("quickCompare column B: " + columnB);
       })
-    }).catch(function(error){
-      console.log(error);
-    })
-  });
+    });
+  }
 }

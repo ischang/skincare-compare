@@ -2,14 +2,21 @@ let waterList = ["aqua", "eau", "water", "h20", "purified water", "water purifie
 let goodWords = ["safe", "good", "yes"];
 let badWords = ["allergic", "bad", "no"];
 let isNotExclusiveListNames = ["sharedList", "quickCompareSharedList", "quickCompareUniqueList"];
-let errors = [];
 let lists = {};
 
-// Method that reads and processes the selected file
+/*
+uploadCsvFile:
+  Purpose: main call function for uploading the .csv and handling data
+
+  - Given an event
+    - Checks browser support file upload method
+    - Grabs the uploaded csv and transforms it to an object
+    - Calls handleData
+*/
 function uploadCsvFile(event) {
   if (!doesBrowserSupportFileUpload()) {
-    console.log("Your brower is not compatible")
-    errors.push('Your browser/browser version is not compatible with the File API. Please refer to https://caniuse.com/#feat=filereader');
+    window.alert("Your browser/browser version is not compatible with file uploading. Please refer to https://caniuse.com/#feat=filereader");
+    console.log("Your browser/browser version is not compatible with the File API. Please refer to https://caniuse.com/#feat=filereader")
   } else {
     let data = null;
     let reader = new FileReader();
@@ -28,44 +35,49 @@ function uploadCsvFile(event) {
           lists["allergicListExclusive"] = result[1].exclusiveLists.allergicListExclusive;
           lists["safeListExclusive"] = result[1].exclusiveLists.safeListExclusive;
 
-          console.log(lists);
           setDataAsTable(lists.sharedList, "sharedList", true);
           setDataAsTable(lists.safeList, "safeList", true);
           setDataAsTable(lists.allergicList, "allergicList", true);
-
-          if(errors.length > 0) {
-            console.log("There are errors");
-          } else {
-            console.log('Imported -' + data.length + '- rows successfully!');
-          }
-
+        }).catch(function(errors){
+          console.log("uploadCsvFile in promise: " + errors);
+          console.log("uploadCsvFile promises: "  + promises);
         });
       } else {
-        errors.push("No data to import!");
-        console.log('No data to import!');
+        console.log('uploadCsvFile: no data to import!');
       }
     };
 
     reader.onerror = function () {
-      errors.push("Unable to read file");
-      console.log('Unable to read ' + file.fileName);
+      console.log('uploadCsvFile: unable to read ' + file.fileName);
     };
-  }
-
-  if (errors.length > 0) {
-    console.log(errors);
   }
 }
 
-// Method that checks that the browser supports the HTML5 File API
+/*
+doesBrowserSupportFileUpload:
+  Purpose: checks if user's browser and browser version for file upload functionality
+*/
 function doesBrowserSupportFileUpload() {
   return window.File && window.FileReader && window.FileList && window.Blob;
 }
 
+/*
+setFileNameOnUpload:
+  Purpose: shows user the file name that they uploaded
+*/
 function setFileNameOnUpload(file) {
   $('#uploadFileInfo').val(file.files[0].name)
 }
 
+/*
+isDefaultList:
+  Purpose: checks if radios were checked in each category
+
+  - Given a listname
+    - If the list is a safeList, check if the safeRadio was checked
+      - If not, it is a safe exclusive list
+    - Same for allergicList
+*/
 function isDefaultList(listname) {
   if (listname == "safeList") {
     return document.getElementById("safeRadio").checked;
@@ -74,11 +86,23 @@ function isDefaultList(listname) {
   }
 }
 
+/*
+download:
+  Purpose: lets the user download a .csv from memory
+
+  - Given a filename, listname, quickCompare boolean, and the event
+    - Checks if the user didn't input anything
+    - Checks if it's an exclusive list or not
+    - Create the csv content using Blob (and if it's a quick compare, make according changes,
+      such as no count header)
+    - Create an anchor element to allow download
+*/
 function download(filename, listName, quickCompare, event) {
   event.preventDefault();
 
   if (Object.keys(lists).length == 0) {
-    window.alert("You didn't input anything as a CSV file or input any text yet!");
+    window.alert("You didn't input anything as a CSV file or any text yet!");
+    console.log("download: lists was empty.")
   }
 
   if (!isNotExclusiveListNames.includes(listName) && !isDefaultList(listName)) {
@@ -104,6 +128,14 @@ function download(filename, listName, quickCompare, event) {
   }
 }
 
+/*
+createCsvContent:
+  Purpose: create the csv file array
+
+  - Given a list and a quickCompare boolean
+    - Push the csv header and list row into an array
+    - If it's a quickCompare, no need for count
+*/
 function createCsvContent(list, quickCompare) {
   let lineArray = [];
   let header = quickCompare ? "Ingredient" : "Ingredient, #";
