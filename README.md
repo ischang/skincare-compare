@@ -57,7 +57,7 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 - [x] 1) 2 sheets: shared for all good, shared for all bad 
 - [x] 2) 2 sheets: all the good ingredients without the bad ingredients, all the bad ingredients - good one 
 - [x] 3) ignores result column and just finds all common ingredients into one download
-- [] downloadable example csv
+- [x] downloadable example csv
 - [x] cosdna scraping support https://stackoverflow.com/questions/15005500/loading-cross-domain-endpoint-with-jquery-ajax
 - [ ] test various cases (see below)
 - [x] make how to use this guide (how to do comma deliminiation, result can say: good, bad, allergic, explain that water/aqua -> is just water, google spreadsheet -> CSV, example basic CSV, resources, and about page
@@ -68,8 +68,12 @@ after consulting w a js goddess, i'm probably just going to draw a transmutation
 - [x] sanitize inputs for special characters (v strange)
 - [x] add exception for "1,2..." 
 - [ ] testing bigger spreadsheets with more columns and various edge cases for the merge
-- [ ] error alert cleanups in console and the like 
-- [ ] change index.html -> home 
+- [x] error alert cleanups in console and the like 
+
+# cleanup
+- [] remove email from resume
+- [] maybe get a new domain? so annoying
+- [] change index.html -> home 
 
 # refs
 i haven't written a webapp in so long and i refuse to write in javascript so i need to consult beginner tutorials that i am compiling here:
