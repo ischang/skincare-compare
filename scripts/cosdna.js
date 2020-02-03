@@ -98,7 +98,7 @@ getIngredients:
 function getIngredients (data) {
   let html = $.parseHTML(data);
   let results = [];
-  $(html).find('.iStuffTable .iStuffETitle').each(function(){
+  $(html).find('.tr-i .colors').each(function(){
     results.push($(this).text())
   });
 
