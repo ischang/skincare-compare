@@ -1,5 +1,5 @@
 # skincare-compare
-[Skincare Compare](https://skincarecompare.me)
+[Skincare Compare](https://stephanieischang.me/skincare-compare)
 
 ## why i wrote this
 
