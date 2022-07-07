@@ -1,5 +1,5 @@
 # skincare-compare
-[Skincare Compare](https://stephanieischang.me/skincare-compare)
+You can find the gh-pages project site here: [Skincare Compare](https://stephanieischang.me/skincare-compare)
 
 ## why i wrote this
 
