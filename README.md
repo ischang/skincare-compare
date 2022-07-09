@@ -1,6 +1,12 @@
 # skincare-compare
 You can find the gh-pages project site here: [Skincare Compare](https://stephanieischang.me/skincare-compare)
 
+## todo (maybe never):
+
+- revamp this a little to have better ux/ui and do some page gen 
+- make ingredients case insensitive (v silly that it's not)
+- ummmm idk maybe check if the scraper still works
+
 ## why i wrote this
 
 This website began as a simple script to make my life easier. I have extremely sensitive skin that breaks out in extremely itchy, eczema patches when triggered by allergens or heat, so finding products that worked for my skin has always been extremely difficult. 
