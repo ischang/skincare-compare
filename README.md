@@ -5,7 +5,7 @@ You can find the gh-pages project site here: [Skincare Compare](https://stephani
 
 - revamp this a little to have better ux/ui and do some page gen 
 - make ingredients case insensitive (v silly that it's not)
-- ummmm idk maybe check if the scraper still works
+- ummmm fix the scraper since cosdna changed their code again heh
 
 ## why i wrote this
 
