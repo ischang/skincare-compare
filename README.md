@@ -7,15 +7,16 @@ You can find the gh-pages project site here: [Skincare Compare](https://stephani
 - make ingredients case insensitive (v silly that it's not)
 - ummmm fix the scraper since cosdna changed their code again heh
 
-## why i wrote this
+## v simple how to 
 
-This website began as a simple script to make my life easier. I have extremely sensitive skin that breaks out in extremely itchy, eczema patches when triggered by allergens or heat, so finding products that worked for my skin has always been extremely difficult. 
+1. provide a çsv w/3 columns: name, ingredient list (delimited by space or commas), and reaction (safe/allergic)
+2. upload & lists will self-populate
 
-Testing out products was always a mess of trial and error, loads of research, dozens of decant bottles, and ritual patch testing. I started a spreadsheet in late 2018/early 2019 and started comparing what products worked and what triggered my contact/atopic dermatitis and eczema. But as my list grew, comparing ingredients became a tedious chore. 
+OR
 
-I wanted a tool that could let me compare the laundry list of ingredients that each product seemed to have, but besides [this Cosdna tool I found on r/AsianBeauty](https://www.reddit.com/r/AsianBeauty/comments/3g34we/cosdna_comparison_tool/), which didn't work for me, there wasn't anything else. 
+quick compare two sets of ingredients with quick compare
 
-So I wrote this. I was inspired by the tool above to add Cosdna scraping, but beyond that, the code is my own. It's not the prettiest and the logic and design is rather simple, but it made my life easier comparing ingredients. And, hopefully, it'll make your life easier as well. Happy holy grail and skincare hunting!
+note: cosdna compare doesn't work anymore \o/ i have to fix the scraping or just nix it completely 
 
 ## how to run this code locally
 
