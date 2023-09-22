@@ -14,7 +14,7 @@ You can find the gh-pages project site here: [Skincare Compare](https://stephani
 
 OR
 
-quick compare two sets of ingredients with quick compare
+- quick compare two sets of ingredients with quick compare
 
 note: cosdna compare doesn't work anymore \o/ i have to fix the scraping or just nix it completely 
 
